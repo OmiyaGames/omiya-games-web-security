@@ -1,8 +1,11 @@
 {
-    "name": "OmiyaGames.Template.Editor.Tests",
+    "name": "OmiyaGames.Web.Security.Editor",
     "references": [
-        "OmiyaGames.Template",
-        "OmiyaGames.Template.Editor"
+        "OmiyaGames",
+        "OmiyaGames.Common.Editor",
+        "OmiyaGames.Web",
+        "OmiyaGames.Global",
+        "OmiyaGames.Web.Security"
     ],
     "includePlatforms": [
         "Editor"
@@ -14,7 +17,5 @@
     "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
-    "optionalUnityReferences": [
-        "TestAssemblies"
-    ]
+    "noEngineReferences": false
 }

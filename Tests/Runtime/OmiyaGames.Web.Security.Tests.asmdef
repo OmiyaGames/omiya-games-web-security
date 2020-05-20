@@ -1,9 +1,12 @@
 {
-    "name": "OmiyaGames.Template.Tests",
+    "name": "OmiyaGames.Web.Security.Tests",
     "references": [
-        "OmiyaGames.Template"
+        "OmiyaGames.Web.Security"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor",
+        "WebGL"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
