@@ -1,8 +1,6 @@
 {
     "name": "OmiyaGames.Web.Security",
     "references": [
-        "OmiyaGames",
-        "OmiyaGames.Web",
         "OmiyaGames.Global",
         "OmiyaGames.Cryptography"
     ],
