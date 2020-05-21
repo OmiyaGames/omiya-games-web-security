@@ -45,6 +45,7 @@ namespace OmiyaGames.Web.Security
     ///-----------------------------------------------------------------------
     /// <summary>
     /// Helper debug methods for OmiyaGames.Web.Security namespace.
+    /// <seealso cref="WebLocationChecker"/>
     /// </summary>
     public static class DebugWebLocation
     {

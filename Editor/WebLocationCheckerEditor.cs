@@ -7,6 +7,7 @@ using OmiyaGames.Common.Editor;
 namespace OmiyaGames.UI.Web
 {
     ///-----------------------------------------------------------------------
+    /// <remarks>
     /// <copyright file="WebLocationCheckerEditor.cs" company="Omiya Games">
     /// The MIT License (MIT)
     /// 
@@ -30,10 +31,31 @@ namespace OmiyaGames.UI.Web
     /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     /// THE SOFTWARE.
     /// </copyright>
-    /// <date>5/15/2016</date>
-    /// <author>Taro Omiya</author>
+    /// <list type="table">
+    /// <listheader>
+    /// <term>Revision</term>
+    /// <description>Description</description>
+    /// </listheader>
+    /// <item>
+    /// <term>
+    /// <strong>Date:</strong> 5/15/2016<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>Initial verison.</description>
+    /// </item><item>
+    /// <term>
+    /// <strong>Version:</strong> 0.1.0-preview.1<br/>
+    /// <strong>Date:</strong> 5/20/2020<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>Converting to package.</description>
+    /// </item>
+    /// </list>
+    /// </remarks>
     ///-----------------------------------------------------------------------
-    /// Editor script for <code>WebLocationChecker</code>
+    /// <summary>
+    /// Editor script for <see cref="WebLocationChecker">
+    /// </summary>
     [CustomEditor(typeof(WebLocationChecker))]
     public class WebLocationCheckerEditor : Editor
     {
@@ -65,6 +87,7 @@ namespace OmiyaGames.UI.Web
         ReorderableList domainMustContainList;
         ReorderableList waitObjectsList;
 
+        /// <inheritdoc/>
         public void OnEnable()
         {
             // Grab all serialized properties
@@ -88,6 +111,7 @@ namespace OmiyaGames.UI.Web
             waitObjectsList.elementHeight = EditorHelpers.SingleLineHeight(VerticalMargin);
         }
 
+        /// <inheritdoc/>
         public override void OnInspectorGUI()
         {
             serializedObject.Update();

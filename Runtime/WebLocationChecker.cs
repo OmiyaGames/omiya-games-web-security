@@ -12,6 +12,7 @@ using OmiyaGames.Global;
 namespace OmiyaGames.Web.Security
 {
     ///-----------------------------------------------------------------------
+    /// <remarks>
     /// <copyright file="WebLocationChecker.cs" company="Omiya Games">
     /// The MIT License (MIT)
     /// 
@@ -35,69 +36,97 @@ namespace OmiyaGames.Web.Security
     /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     /// THE SOFTWARE.
     /// </copyright>
-    /// <date>5/15/2016</date>
-    /// <author>Taro Omiya</author>
-    /// <author>andyman</author>
-    /// <author>jcx</author>
+    /// <list type="table">
+    /// <listheader>
+    /// <term>Revision</term>
+    /// <description>Description</description>
+    /// </listheader>
+    /// <item>
+    /// <term>
+    /// <strong>Date:</strong> 5/15/2016<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>Initial verison.</description>
+    /// </item><item>
+    /// <term>
+    /// <strong>Date:</strong> 6/5/2018<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>Removed plain-text support.</description>
+    /// </item><item>
+    /// <term>
+    /// <strong>Date:</strong> 2/12/2019<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>Adding encryption support of the binary <see cref="DomainList"/>.</description>
+    /// </item><item>
+    /// <term>
+    /// <strong>Version:</strong> 0.1.0-preview.1<br/>
+    /// <strong>Date:</strong> 5/20/2020<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>Converting to package.</description>
+    /// </item>
+    /// </list>
+    /// </remarks>
     ///-----------------------------------------------------------------------
     /// <summary>
+    /// <para>
     /// Original code by andyman from Github:<br/>
-    /// https://gist.github.com/andyman/e58dea85cce23cccecff<br/>
+    /// https://gist.github.com/andyman/e58dea85cce23cccecff
+    /// </para><para>
     /// Extra modifications by jcx from Github:<br/>
-    /// https://gist.github.com/jcx/93a3fc93531911add8a8<br/>
-    /// Taro Omiya made a couple of changes as well.<br/>
+    /// https://gist.github.com/jcx/93a3fc93531911add8a8
+    /// </para>
     /// Add this script to an object in the first scene of your game.
     /// It doesn't do anything for non-webplayer builds. For webplayer
     /// builds, it checks the domain to make sure it contains at least
     /// one of the strings, or it will redirect the page to the proper
     /// URL for the game.
     /// </summary>
-    /// <remarks>
-    /// Revision History:
-    /// <list type="table">
-    /// <listheader>
-    /// <description>Date</description>
-    /// <description>Name</description>
-    /// <description>Description</description>
-    /// </listheader>
-    /// <item>
-    /// <description>>5/15/2016</description>
-    /// <description>Taro</description>
-    /// <description>Initial version.</description>
-    /// </item><item>
-    /// <description>6/5/2018</description>
-    /// <description>Taro</description>
-    /// <description>Removed plain-text support.</description>
-    /// </item><item>
-    /// <description>2/12/2019</description>
-    /// <description>Taro</description>
-    /// <description>Adding encryption support of the binary <see cref="DomainList"/>.</description>
-    /// </item>
-    /// </list>
-    /// </remarks>
     [DisallowMultipleComponent]
-    public class WebLocationChecker : Global.ISingletonScript
+    public class WebLocationChecker : ISingletonScript
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public const string RemoteDomainListHeader = "Remote Domain List";
 
-        public enum State
+        /// <summary>
+        /// 
+        /// </summary>
+        public enum State : short
         {
+            /// <summary>
+            /// 
+            /// </summary>
             NotUsed = -1,
+            /// <summary>
+            /// 
+            /// </summary>
             InProgress = 0,
+            /// <summary>
+            /// 
+            /// </summary>
             EncounteredError,
+            /// <summary>
+            /// 
+            /// </summary>
             DomainMatched,
+            /// <summary>
+            /// 
+            /// </summary>
             DomainDidntMatch
         }
 
-        public enum DownloadedFileType
-        {
-            Text,
-            AcceptedDomainListAssetBundle
-        }
-
-#if UNITY_EDITOR || UNITY_WEBGL
+#if UNITY_WEBGL
+        /// <summary>
+        /// Redirects a WebGL build to a specific page.
+        /// This will <em>not</em> open a new tab or window.
+        /// </summary>
+        /// <param name="url"></param>
         [DllImport("__Internal")]
-        private static extern void RedirectTo(string url);
+        public static extern void RedirectTo(string url);
 #endif
 
         ///<summary>
@@ -115,6 +144,9 @@ namespace OmiyaGames.Web.Security
         [SerializeField]
         [Tooltip("[optional] The URL to fetch a list of domains")]
         private string remoteDomainListUrl;
+        /// <summary>
+        /// 
+        /// </summary>
         [SerializeField]
         [Tooltip("[optional] The cryptographer that decrypts the encrypted strings in the list of domains")]
         private StringCryptographer domainDecrypter;
@@ -142,12 +174,18 @@ namespace OmiyaGames.Web.Security
         private string retrievedHostName = null;
 
         #region Properties
+        /// <summary>
+        /// 
+        /// </summary>
         public State CurrentState
         {
             get;
             private set;
         } = State.NotUsed;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsDomainListSuccessfullyDownloaded
         {
             get
@@ -156,6 +194,9 @@ namespace OmiyaGames.Web.Security
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string RetrievedHostName
         {
             get
@@ -164,6 +205,9 @@ namespace OmiyaGames.Web.Security
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string[] DefaultDomainList
         {
             get
@@ -172,32 +216,50 @@ namespace OmiyaGames.Web.Security
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string[] DownloadedDomainList
         {
             get;
             private set;
         } = null;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string DownloadDomainsUrl
         {
             get;
             private set;
         } = null;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Dictionary<string, Regex> AllUniqueDomains
         {
             get;
         } = new Dictionary<string, Regex>();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string DownloadErrorMessage
         {
             get;
             private set;
         } = null;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string RemoteDomainListUrl => remoteDomainListUrl;
         #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override void SingletonAwake()
         {
             if (Singleton.Instance.IsWebApp == true)
@@ -207,18 +269,27 @@ namespace OmiyaGames.Web.Security
             }
         }
 
+        /// <inheritdoc/>
         public override void SceneAwake()
         {
             // Do nothing
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void ForceRedirect()
         {
-            ForceRedirect(new StringBuilder());
+#if UNITY_WEBGL
+            if (string.IsNullOrEmpty(redirectURL) == false)
+            {
+                RedirectTo(redirectURL);
+            }
+#endif
         }
 
         #region Helper Static Methods
-        static State GetNewState(StringBuilder buf, Dictionary<string, Regex> allUniqueDomains, out string retrievedHostName)
+        static State GetNewState(Dictionary<string, Regex> allUniqueDomains, out string retrievedHostName)
         {
             State newState = State.NotUsed;
             retrievedHostName = null;
@@ -390,7 +461,7 @@ namespace OmiyaGames.Web.Security
             PopulateAllUniqueDomains(buf, AllUniqueDomains, DefaultDomainList, DownloadedDomainList);
 
             // Make sure there's at least one domain we need to check
-            CurrentState = GetNewState(buf, AllUniqueDomains, out retrievedHostName);
+            CurrentState = GetNewState(AllUniqueDomains, out retrievedHostName);
 
             // Reactivate any objects
             SetWaitObjectActive(true);
@@ -398,18 +469,8 @@ namespace OmiyaGames.Web.Security
             // Check if we should force redirecting the player
             if ((forceRedirectIfDomainDoesntMatch == true) && (IsDomainInvalid(CurrentState) == true))
             {
-                ForceRedirect(buf);
+                ForceRedirect();
             }
-        }
-
-        void ForceRedirect(StringBuilder buf)
-        {
-#if UNITY_EDITOR || UNITY_WEBGL
-            if (string.IsNullOrEmpty(redirectURL) == false)
-            {
-                RedirectTo(redirectURL);
-            }
-#endif
         }
 
         string GenerateRemoteDomainList(StringBuilder buf)
