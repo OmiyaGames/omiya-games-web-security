@@ -75,7 +75,6 @@ namespace OmiyaGames.UI.Web
             " will match \"www.google.com\", \"o.google.com\", and \".google.com\"," +
             " while \"?.google.com\" will only match \"o.google.com\", and" +
             " \".google.com\"";
-        const int VerticalMargin = 2;
 
         SerializedProperty domainMustContain;
         SerializedProperty remoteDomainListUrl;
@@ -102,13 +101,13 @@ namespace OmiyaGames.UI.Web
             domainMustContainList = new ReorderableList(serializedObject, domainMustContain, true, true, true, true);
             domainMustContainList.drawHeaderCallback = DrawDomainHeader;
             domainMustContainList.drawElementCallback = DrawDomainElement;
-            domainMustContainList.elementHeight = EditorHelpers.SingleLineHeight(VerticalMargin);
+            domainMustContainList.elementHeight = EditorHelpers.SingleLineHeight(EditorHelpers.VerticalMargin);
 
             // Setup waitObjects list
             waitObjectsList = new ReorderableList(serializedObject, waitObjects, true, true, true, true);
             waitObjectsList.drawHeaderCallback = DrawWaitHeader;
             waitObjectsList.drawElementCallback = DrawWaitElement;
-            waitObjectsList.elementHeight = EditorHelpers.SingleLineHeight(VerticalMargin);
+            waitObjectsList.elementHeight = EditorHelpers.SingleLineHeight(EditorHelpers.VerticalMargin);
         }
 
         /// <inheritdoc/>
@@ -158,7 +157,7 @@ namespace OmiyaGames.UI.Web
         void DrawDomainElement(Rect rect, int index, bool isActive, bool isFocused)
         {
             SerializedProperty element = domainMustContain.GetArrayElementAtIndex(index);
-            rect.y += VerticalMargin;
+            rect.y += EditorHelpers.VerticalMargin;
             rect.height = EditorGUIUtility.singleLineHeight;
             EditorGUI.PropertyField(rect, element, GUIContent.none);
         }
@@ -171,7 +170,7 @@ namespace OmiyaGames.UI.Web
         void DrawWaitElement(Rect rect, int index, bool isActive, bool isFocused)
         {
             SerializedProperty element = waitObjects.GetArrayElementAtIndex(index);
-            rect.y += VerticalMargin;
+            rect.y += EditorHelpers.VerticalMargin;
             rect.height = EditorGUIUtility.singleLineHeight;
             EditorGUI.PropertyField(rect, element, GUIContent.none);
         }
