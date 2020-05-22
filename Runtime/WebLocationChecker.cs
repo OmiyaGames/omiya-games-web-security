@@ -72,6 +72,15 @@ namespace OmiyaGames.Web.Security
     /// <description>
     /// Converting to package. Improving documentation for DocFX support.
     /// </description>
+    /// </item><item>
+    /// <term>
+    /// <strong>Version:</strong> 0.1.1-preview.1<br/>
+    /// <strong>Date:</strong> 5/22/2020<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>
+    /// Fixing documentation to actually be XML-compliant
+    /// </description>
     /// </item>
     /// </list>
     /// </remarks>
@@ -87,21 +96,23 @@ namespace OmiyaGames.Web.Security
     /// Add this script to an object in the first scene of your game.
     /// For WebGL builds, this script grabs the domain the game is running on,
     /// and verifies it against two lists:
-    /// </para><para>
-    /// 1) The list of strings in <see cref="DefaultDomainList"/>, or
-    /// </para><para>
-    /// 2) If a <see cref="DomainList"/> was successfully downloaded from
-    /// <see cref="RemoteDomainListUrl"/>, matches the domain to any of the
-    /// globs listed in the <see cref="DomainList"/>. Remember that if the
-    /// <see cref="DomainList"/> is encrypted, to set the
-    /// <see cref="domainDecrypter"/> in the Unity inspector.
-    /// </para><para>
-    /// If the script is attached to a <see cref="GameObject"/> with
-    /// <see cref="Singleton"/> already attached, the above example code
-    /// will run automatically on <see cref="SceneAwake"/>.
-    /// </para>
-    /// </summary>
-    /// <example>
+    /// <list type="number">
+    /// <item><description>
+    /// The list of strings in <see cref="DefaultDomainList"/>.
+    /// </description></item>
+    /// <item><description>
+    /// Optionally, if <see cref="RemoteDomainListUrl"/> isn't an empty string
+    /// (or null), this script will attempt to download from the specified url,
+    /// and read it as a <see cref="DomainList"/>. If successful, the globs
+    /// listed in the <see cref="DomainList"/> will be used to match the domain
+    /// as well. Remember that if the <see cref="DomainList"/> is encrypted,
+    /// the <see cref="domainDecrypter"/> needs to be set in the Unity inspector
+    /// to help decrypt the content of the list.
+    /// </description></item>
+    /// </list>
+    /// Don't forget to run the <see cref="CheckDomainList()"/> coroutine! When
+    /// it finished, the <see cref="CurrentState"/> will be set, indicating
+    /// whether a match was found or not. Here's an example:
     /// <code>
     /// IEnumerator Start()
     /// {
@@ -110,7 +121,11 @@ namespace OmiyaGames.Web.Security
     ///     Debug.Log(checker.CurrentState);
     /// }
     /// </code>
-    /// </example>
+    /// If the script is attached to a <see cref="GameObject"/> with
+    /// <see cref="Singleton"/> already attached, the above example code
+    /// will run automatically on <see cref="SceneAwake"/>.
+    /// </para>
+    /// </summary>
     [DisallowMultipleComponent]
     public class WebLocationChecker : ISingletonScript
     {
