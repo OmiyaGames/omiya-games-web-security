@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Omiya Games - Web Security | Web Security documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Omiya Games - Web Security | Web Security documentation ">
+    <meta name="generator" content="docfx 2.53.1.0">
+    
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles/docfx.vendor.css">
+    <link rel="stylesheet" href="styles/docfx.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">
+                <img id="logo" class="svg" src="logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="omiya-gameshttpswwwomiyagamescom---web-security"><a href="https://www.omiyagames.com/">Omiya Games</a> - Web Security</h1>
+
+<p><a href="https://openupm.com/packages/com.omiyagames.web.security/"><img src="https://img.shields.io/npm/v/com.omiyagames.web.security?label=openupm&amp;registry_uri=https://package.openupm.com" alt="openupm"></a> <a href="https://omiyagames.github.io/omiya-games-web-security/"><img src="https://github.com/OmiyaGames/omiya-games-web-security/workflows/Host%20DocFX%20Documentation/badge.svg" alt="Documentation"></a> <a href="https://bitbucket.org/OmiyaGames/omiya-games-web-security"><img src="https://github.com/OmiyaGames/omiya-games-web-security/workflows/Mirroring/badge.svg" alt="Mirroring"></a> <a href="https://ko-fi.com/I3I51KS8F"><img src="https://www.ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"></a></p>
+<p><strong>Web Security</strong> is a Github package <a href="https://www.omiyagames.com/">Omiya Games</a> uses to peform various security features for WebGL builds.  This includes:</p>
+<h3 id="web-location-checker">Web Location Checker</h3>
+<p>A script that verifies the build is running on the correct host.  Attach to a <code>GameObject</code> like any other <code>MonoBehavior</code>, then call the coroutine, <code>CheckDomainList()</code>, from another script.  For example, one can create a script with the method below, then attach it to the same <code>GameObject</code> the <code>WebLocationChecker</code> is on:</p>
+<pre><code class="lang-csharp">IEnumerator Start()
+{
+    // Verify the domain
+    WebLocationChecker checker = GetComponent&lt;WebLocationChecker&gt;();
+    yield return StartCoroutine(checker.CheckDomainList());
+
+    // Check if the domain was verified
+    if(checker.CurrentState == WebLocationChecker.State.DomainMatched)
+    {
+        // Change scene to the main menu
+        SceneManager.LoadScene(&quot;Main menu&quot;);
+    }
+}
+</code></pre><p>The script contains the following inspector fields:</p>
+<p><img src="https://omiyagames.github.io/omiya-games-web-security/resources/web-location-checker.png" alt="Inspector"></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th style="text-align:center">Required?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Remote Domain List Url</td>
+<td style="text-align:center">No</td>
+<td>The path to download a <a href="https://omiyagames.github.io/omiya-games-cryptography/manual/domain-list.html"><code>DomainList</code></a>, relative to the root of the WebGL build (typically where <code>index.html</code> is in). The strings in the <code>DomainList</code> will be used to match the domain the build is running on, <em>in addition to</em> strings listed in <code>Domain Must Contain</code>. Leave empty if no file should be downloaded.</td>
+</tr>
+<tr>
+<td>Domain Decrypter</td>
+<td style="text-align:center">No</td>
+<td>The <a href="https://omiyagames.github.io/omiya-games-cryptography/manual/string-cryptographer.html"><code>StringCryptographer</code></a> to use to decrypt the content of the downloaded <a href="https://omiyagames.github.io/omiya-games-cryptography/manual/domain-list.html"><code>DomainList</code></a>. Entirely optional, especially if the downloaded file is not expected to be encrypted.</td>
+</tr>
+<tr>
+<td>GameObjects to Deactivate</td>
+<td style="text-align:center">No</td>
+<td>A list of <code>GameObjects</code> to deactivate while the script verifies the domain the build is running on.</td>
+</tr>
+<tr>
+<td>Domain Must Contain</td>
+<td style="text-align:center">Yes</td>
+<td>A list of strings to verify whether the domain the game is running on matches. This script supports <code>?</code> and <code>*</code> wildcards (former any single character, while the latter matches a series of character).</td>
+</tr>
+<tr>
+<td>Force Redirect</td>
+<td style="text-align:center">No</td>
+<td>If checked, <em>and</em> the domain did not match, prompts the script to redirect to a different website. If this build is embedded in an <code>iframe</code> with redirect permission restrictions (which most browsers enable by default), the redirect may fail with an <code>AccessDenied</code> error.</td>
+</tr>
+<tr>
+<td>Redirect URL</td>
+<td style="text-align:center">If <code>Force Redirect</code> is checked</td>
+<td>The URL to redirect to if the doamin did not match. This URL should include <code>https://</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="install">Install</h2>
+<p>There are two common methods for installing this package.</p>
+<h3 id="through-unity-package-managerhttpsdocsunity3dcommanualupm-ui-giturlhtml">Through <a href="https://docs.unity3d.com/Manual/upm-ui-giturl.html">Unity Package Manager</a></h3>
+<p>Unity&#39;s own Package Manager supports <a href="https://docs.unity3d.com/Manual/upm-ui-giturl.html">importing packages through a URL to a Git repo</a>:</p>
+<ol>
+<li>First, on this repository page, click the &quot;Clone or download&quot; button, and copy over this repository&#39;s HTTPS URL.  </li>
+<li>Then click on the + button on the upper-left-hand corner of the Package Manager, select &quot;Add package from git URL...&quot; on the context menu, then paste this repo&#39;s URL!</li>
+</ol>
+<p>While easy and straightforward, this method has a few major downside: it does not support dependency resolution and package upgrading when a new version is released.  To add support for that, the following method is recommended:</p>
+<h3 id="through-openupmhttpsopenupmcom">Through <a href="https://openupm.com/">OpenUPM</a></h3>
+<p>Installing via <a href="https://openupm.com/">OpenUPM&#39;s command line tool</a> is recommended because it supports dependency resolution, upgrading, and downgrading this package.</p>
+<p>If you haven&#39;t already <a href="https://openupm.com/docs/getting-started.html#installing-openupm-cli">installed OpenUPM</a>, you can do so through Node.js&#39;s <code>npm</code> (obviously have Node.js installed in your system first):</p>
+<pre><code>npm install -g openupm-cli
+</code></pre><p>Then, to install this package, just run the following command at the root of your Unity project:</p>
+<pre><code>openupm add com.omiyagames.web.security
+</code></pre><h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://omiyagames.github.io/omiya-games-web-security/">Documentation</a></li>
+<li><a href="https://omiyagames.github.io/omiya-games-web-security/manual/changelog.md">Change Log</a></li>
+</ul>
+<h2 id="license">LICENSE</h2>
+<p>Overall package is licensed under <a href="https://github.com/OmiyaGames/omiya-games-web-security/blob/master/LICENSE.md">MIT</a>, unless otherwise noted in the <a href="https://github.com/OmiyaGames/omiya-games-web-security/blob/master/THIRD%20PARTY%20NOTICES.md">3rd party licenses</a> file and/or source code.</p>
+<p>Copyright (c) 2019-2020 Omiya Games</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/OmiyaGames/omiya-games-web-security/blob/master/Documentation~/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2020 Omiya Games
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="styles/docfx.js"></script>
+    <script type="text/javascript" src="styles/main.js"></script>
+  </body>
+</html>
