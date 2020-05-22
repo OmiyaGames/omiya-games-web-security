@@ -83,7 +83,30 @@
   
   <h1 id="OmiyaGames_Web_Security_WebLocationChecker" data-uid="OmiyaGames.Web.Security.WebLocationChecker" class="text-break">Class WebLocationChecker
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>
+Original code by andyman from Github:<br>
+<a href="https://gist.github.com/andyman/e58dea85cce23cccecff">https://gist.github.com/andyman/e58dea85cce23cccecff</a>
+</p><p>
+Extra modifications by jcx from Github:<br>
+<a href="https://gist.github.com/jcx/93a3fc93531911add8a8">https://gist.github.com/jcx/93a3fc93531911add8a8</a>
+</p><p>
+Add this script to an object in the first scene of your game.
+For WebGL builds, this script grabs the domain the game is running on,
+and verifies it against two lists:
+</p><p>
+1) The list of strings in <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_DefaultDomainList">DefaultDomainList</a>, or
+</p><p>
+2) If a <see cref="!:DomainList"></see> was successfully downloaded from
+<a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_RemoteDomainListUrl">RemoteDomainListUrl</a>, matches the domain to any of the
+globs listed in the <see cref="!:DomainList"></see>. Remember that if the
+<see cref="!:DomainList"></see> is encrypted, to set the
+<span class="xref">OmiyaGames.Web.Security.WebLocationChecker.domainDecrypter</span> in the Unity inspector.
+</p><p>
+If the script is attached to a <see cref="!:GameObject"></see> with
+<see cref="!:Singleton"></see> already attached, the above example code
+will run automatically on <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_SceneAwake">SceneAwake()</a>.
+</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -96,6 +119,53 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class WebLocationChecker : ISingletonScript</code></pre>
   </div>
+  <h5 id="OmiyaGames_Web_Security_WebLocationChecker_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p><copyright file="WebLocationChecker.cs" company="Omiya Games">
+The MIT License (MIT)<p>
+<p>Copyright (c) 2014-2018 Omiya Games</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</copyright>
+<table><thead><tr><th>Revision</th><th>Description</th></tr></thead><tbody><tr><td>
+<strong>Date:</strong> 5/15/2016<br>
+<strong>Author:</strong> Taro Omiya
+</td><td>Initial verison.</td></tr><tr><td>
+<strong>Date:</strong> 6/5/2018<br>
+<strong>Author:</strong> Taro Omiya
+</td><td>Removed plain-text support.</td></tr><tr><td>
+<strong>Date:</strong> 2/12/2019<br>
+<strong>Author:</strong> Taro Omiya
+</td><td>
+Adding encryption support of the binary <see cref="!:DomainList"></see>.
+</td></tr><tr><td>
+<strong>Version:</strong> 0.1.0-preview.1<br>
+<strong>Date:</strong> 5/20/2020<br>
+<strong>Author:</strong> Taro Omiya
+</td><td>
+Converting to package. Improving documentation for DocFX support.
+</td></tr></tbody></table></p>
+</div>
+  <h5 id="OmiyaGames_Web_Security_WebLocationChecker_examples"><strong>Examples</strong></h5>
+  <pre><code>IEnumerator Start()
+{
+    WebLocationChecker checker = GetComponent&lt;WebLocationChecker>();
+    yield return StartCoroutine(checker.CheckDomainList());
+    Debug.Log(checker.CurrentState);
+}</code></pre>
+
   <h3 id="fields">Fields
   </h3>
   
