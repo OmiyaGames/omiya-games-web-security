@@ -1,20 +1,41 @@
-# [Omiya Games](https://www.omiyagames.com/) - Template Unity Package
+# [Omiya Games](https://www.omiyagames.com/) - Web Security
 
-[![Template Unity Package documentation](https://github.com/OmiyaGames/template-unity-package/workflows/Host%20DocFX%20Documentation/badge.svg)](https://omiyagames.github.io/template-unity-package/) [![Mirroring](https://github.com/OmiyaGames/template-unity-package/workflows/Mirroring/badge.svg)](https://bitbucket.org/OmiyaGames/template-unity-package) [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I3I51KS8F)
+[![openupm](https://img.shields.io/npm/v/com.omiyagames.web.security?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.omiyagames.web.security/) [![Documentation](https://github.com/OmiyaGames/omiya-games-web-security/workflows/Host%20DocFX%20Documentation/badge.svg)](https://omiyagames.github.io/omiya-games-web-security/) [![Mirroring](https://github.com/OmiyaGames/omiya-games-web-security/workflows/Mirroring/badge.svg)](https://bitbucket.org/OmiyaGames/omiya-games-web-security) [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I3I51KS8F)
 
-![Unity Package Manager](https://omiyagames.github.io/template-unity-package/resources/preview.png)
+**Web Security** is a Github package [Omiya Games](https://www.omiyagames.com/) uses to peform various security features for WebGL builds.  This includes:
 
-**Template Unity Package** is a Github template [Omiya Games](https://www.omiyagames.com/) uses to start a new [Unity](https://unity.com/) package.  To use this template for your own purposes, we recommend:
+### Web Location Checker
 
-- Clicking on the green "Use this template" button to create a new online repository on Github directly, or
-- Click the "Releases" link, and download the latest archive as zip or gzip file.
+A script that verifies the build is running on the correct host.  Attach to a `GameObject` like any other `MonoBehavior`, then call the coroutine, `CheckDomainList()`, from another script.  For example, one can create a script with the method below, then attach it to the same `GameObject` the `WebLocationChecker` is on:
 
-From there, consult the following documentation to get a better idea of what files should be edited and/or renamed, and how:
+```csharp
+IEnumerator Start()
+{
+    // Verify the domain
+    WebLocationChecker checker = GetComponent<WebLocationChecker>();
+    yield return StartCoroutine(checker.CheckDomainList());
 
-- This project's [own documentation](https://omiyagames.github.io/template-unity-package/)
-- [*How to Split Up an Existing Unity Git Project into Smaller Unity Packages*](https://www.taroomiya.com/2020/04/29/how-to-split-up-an-existing-unity-git-project-into-smaller-unity-packages/) by [Taro Omiya](https://github.com/japtar10101)
+    // Check if the domain was verified
+    if(checker.CurrentState == WebLocationChecker.State.DomainMatched)
+    {
+        // Change scene to the main menu
+        SceneManager.LoadScene("Main menu");
+    }
+}
+```
 
-This package uses [DocFX](https://dotnet.github.io/docfx/) and Github Actions to auto-generate its documentation from both the comments in the source code and the Markdown files in the [`Documentation~`](/Documentation~) directory.  Consult the manual on [customizing documentation files](https://omiyagames.github.io/template-unity-package/manual/customizeDocumentation.html) for your own packages.  There is also has a pre-made [Doxygen](https://github.com/doxygen/doxygen) settings file in the same directory to run Doxywizard through.
+The script contains the following inspector fields:
+
+![Inspector](https://omiyagames.github.io/omiya-games-web-security/resources/web-location-checker.png)
+
+| Field                     	|           Required?          	| Description 	|
+|---------------------------	|:----------------------------:	|-------------	|
+| Remote Domain List Url    	|               No             	| The path to download a [`DomainList`](https://omiyagames.github.io/omiya-games-cryptography/manual/domain-list.html), relative to the root of the WebGL build (typically where `index.html` is in). The strings in the `DomainList` will be used to match the domain the build is running on, *in addition to* strings listed in `Domain Must Contain`. Leave empty if no file should be downloaded.	|
+| Domain Decrypter          	|              No              	| The [`StringCryptographer`](https://omiyagames.github.io/omiya-games-cryptography/manual/string-cryptographer.html) to use to decrypt the content of the downloaded [`DomainList`](https://omiyagames.github.io/omiya-games-cryptography/manual/domain-list.html). Entirely optional, especially if the downloaded file is not expected to be encrypted.	|
+| GameObjects to Deactivate 	|               No             	| A list of `GameObjects` to deactivate while the script verifies the domain the build is running on.	|
+| Domain Must Contain       	|              Yes             	| A list of strings to verify whether the domain the game is running on matches. This script supports `?` and `*` wildcards (former any single character, while the latter matches a series of character).	|
+| Force Redirect            	|              No              	| If checked, *and* the domain did not match, prompts the script to redirect to a different website. If this build is embedded in an `iframe` with redirect permission restrictions (which most browsers enable by default), the redirect may fail with an `AccessDenied` error.	|
+| Redirect URL              	| If `Force Redirect` is checked 	| The URL to redirect to if the doamin did not match. This URL should include `https://`	|
 
 ## Install
 
@@ -31,7 +52,7 @@ While easy and straightforward, this method has a few major downside: it does no
 
 ### Through [OpenUPM](https://openupm.com/)
 
-Installing via [OpenUPM's command line tool](https://openupm.com/) is recommended because it supports dependency resolution, upgrading, and downgrading this package.  Given this package is just an example, thought, it hadn't been added into OpenUPM yet.  So the rest of these instructions are hypothetical...for now...
+Installing via [OpenUPM's command line tool](https://openupm.com/) is recommended because it supports dependency resolution, upgrading, and downgrading this package.
 
 If you haven't already [installed OpenUPM](https://openupm.com/docs/getting-started.html#installing-openupm-cli), you can do so through Node.js's `npm` (obviously have Node.js installed in your system first):
 ```
@@ -39,16 +60,16 @@ npm install -g openupm-cli
 ```
 Then, to install this package, just run the following command at the root of your Unity project:
 ```
-openupm add com.omiyagames.template
+openupm add com.omiyagames.web.security
 ```
 
 ## Resources
 
-- [Documentation](https://omiyagames.github.io/template-unity-package/)
-- [Change Log](/CHANGELOG.md)
+- [Documentation](https://omiyagames.github.io/omiya-games-web-security/)
+- [Change Log](https://omiyagames.github.io/omiya-games-web-security/manual/changelog.md)
 
 ## LICENSE
 
-Overall package is licensed under [MIT](/LICENSE.md), unless otherwise noted in the [3rd party licenses](/THIRD%20PARTY%20NOTICES.md) file and/or source code.
+Overall package is licensed under [MIT](https://github.com/OmiyaGames/omiya-games-web-security/blob/master/LICENSE.md), unless otherwise noted in the [3rd party licenses](https://github.com/OmiyaGames/omiya-games-web-security/blob/master/THIRD%20PARTY%20NOTICES.md) file and/or source code.
 
 Copyright (c) 2019-2020 Omiya Games

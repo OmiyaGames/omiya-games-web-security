@@ -1,9 +1,8 @@
 {
     "name": "OmiyaGames.Web.Security",
     "references": [
-        "OmiyaGames",
-        "OmiyaGames.Web",
-        "OmiyaGames.Global"
+        "OmiyaGames.Global",
+        "OmiyaGames.Cryptography"
     ],
     "includePlatforms": [
         "Editor",

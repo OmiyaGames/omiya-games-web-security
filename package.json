@@ -16,8 +16,8 @@
   "dependencies": {
     "com.unity.ext.nunit": "1.0.0",
     "com.omiyagames.common": "0.1.3-preview.1",
-    "com.omiyagames.web": "0.1.0-preview.1",
-    "com.omiyagames.global": "0.1.0-preview.1"
+    "com.omiyagames.global": "0.1.0-preview.1",
+    "com.omiyagames.cryptography": "0.2.1-preview.1"
   },
   "keywords": [
     "Omiya Games",
@@ -27,14 +27,21 @@
     "Web",
     "Security"
   ],
+  "samples": [
+    {
+      "displayName": "Debug WebLocationChecker Scene",
+      "description": "IMPORTANT: this sample relies on TextMeshPro! Scene and script that displays debugging info on WebLocationChecker.",
+      "path": "Samples~/DebugWebLocationChecker"
+    }
+  ],
   "scopedRegistries": [
     {
       "name": "package.openupm.com",
       "url": "https://package.openupm.com",
       "scopes": [
         "com.omiyagames.common",
-        "com.omiyagames.web",
         "com.omiyagames.global",
+        "com.omiyagames.cryptography",
         "com.openupm"
       ]
     }
