@@ -35,7 +35,7 @@ The script contains the following inspector fields:
 | GameObjects to Deactivate 	|               No             	| A list of `GameObjects` to deactivate while the script verifies the domain the build is running on.	|
 | Domain Must Contain       	|              Yes             	| A list of strings to verify whether the domain the game is running on matches. This script supports `?` and `*` wildcards (former any single character, while the latter matches a series of character).	|
 | Force Redirect            	|              No              	| If checked, *and* the domain did not match, prompts the script to redirect to a different website. If this build is embedded in an `iframe` with redirect permission restrictions (which most browsers enable by default), the redirect may fail with an `AccessDenied` error.	|
-| Redirect URL              	| if Force Redirect is checked 	| The URL to redirect to if the doamin did not match. This URL should include `https://`	|
+| Redirect URL              	| If `Force Redirect` is checked 	| The URL to redirect to if the doamin did not match. This URL should include `https://`	|
 
 ## Install
 
