@@ -1,5 +1,16 @@
 This package borrows code from various different sources, including:
 
+# Web Location Checker
+
+Web Location Checker is a script originally written by [Andrew Wang](https://github.com/andyman). It went through a number of revisions, including modifications from [jcx](https://github.com/jcx), and of course, [Omiya Games](https://www.omiyagames.com/).
+
+### Relevant Files
+- [Runtime/WebLocationChecker.cs](https://github.com/OmiyaGames/omiya-games-web-security/tree/master/Runtime/WebLocationChecker.cs)
+
+### Credits
+- Author: [Andrew Wang](https://github.com/andyman) and [jcx](https://github.com/jcx)
+- Source: [Andrew Wang's original](https://gist.github.com/andyman/e58dea85cce23cccecff) and [jcx modifications](https://gist.github.com/jcx/93a3fc93531911add8a8).
+
 # [DocFX for Unity](https://github.com/NormandErwan/DocFxForUnity)
 
 ### Relevant Files
