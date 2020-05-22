@@ -1,5 +1,9 @@
 # Change Log:
 
+## 0.1.1-preview.1
+
+- Fix: Scripting API documentation for [`WebLocationChecker`](https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.WebLocationChecker.html) should now display.  This was due to accidentally creating unknown XML tags in the comments.
+
 ## 0.1.0-preview.1
 
 - Initial release

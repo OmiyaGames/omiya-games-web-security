@@ -96,22 +96,21 @@ namespace OmiyaGames.Web.Security
     /// <see cref="DomainList"/> is encrypted, to set the
     /// <see cref="domainDecrypter"/> in the Unity inspector.
     /// </para><para>
-    /// Used as follows:
-    /// </para>
-    /// <code>
-    /// IEnumerator Start()
-    /// {
-    ///     WebLocationChecker checker = GetComponent<WebLocationChecker>();
-    ///     yield return StartCoroutine(checker.CheckDomainList());
-    ///     Debug.Log(checker.CurrentState);
-    /// }
-    /// </code>
-    /// <para>
     /// If the script is attached to a <see cref="GameObject"/> with
     /// <see cref="Singleton"/> already attached, the above example code
     /// will run automatically on <see cref="SceneAwake"/>.
     /// </para>
     /// </summary>
+    /// <example>
+    /// <code>
+    /// IEnumerator Start()
+    /// {
+    ///     WebLocationChecker checker = GetComponent&lt;WebLocationChecker&gt;();
+    ///     yield return StartCoroutine(checker.CheckDomainList());
+    ///     Debug.Log(checker.CurrentState);
+    /// }
+    /// </code>
+    /// </example>
     [DisallowMultipleComponent]
     public class WebLocationChecker : ISingletonScript
     {
