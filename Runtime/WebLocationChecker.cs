@@ -5,6 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Collections;
 using System.Collections.Generic;
+#if UNITY_WEBGL
+using System.Runtime.InteropServices;
+#endif
 using OmiyaGames.Cryptography;
 using OmiyaGames.Global;
 

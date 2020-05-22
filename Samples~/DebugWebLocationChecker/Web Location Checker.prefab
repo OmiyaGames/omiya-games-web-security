@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 11400000}
   - component: {fileID: 11449788}
   m_Layer: 0
-  m_Name: Singleton
+  m_Name: Web Location Checker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   domainMustContain:
   - localhost
   - developer.cloud.unity3d.com
-  remoteDomainListUrl: TemplateData/domains
+  remoteDomainListUrl: 
   domainDecrypter: {fileID: 0}
   waitObjects: []
   forceRedirectIfDomainDoesntMatch: 0
