@@ -2,6 +2,8 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using OmiyaGames.Common.Editor;
+using OmiyaGames.Global.Editor;
 
 namespace OmiyaGames.Web.Security.Editor
 {
@@ -52,7 +54,7 @@ namespace OmiyaGames.Web.Security.Editor
     /// </summary>
     public class WebDomainVerifierSettingsProvider : SettingsProvider
     {
-        public const string AssetPath = "Assets/Omiya Games/Settings/WebDomainVerifier.asset";
+        public const string AssetFileName = "WebDomainVerifier.asset";
         private SerializedObject webDomainVerifier;
 
         private class Styles
@@ -81,33 +83,28 @@ namespace OmiyaGames.Web.Security.Editor
         [SettingsProvider]
         public static SettingsProvider CreateSettingsProvider()
         {
-            //if (IsSettingsAvailable)
-            //{
-                WebDomainVerifierSettingsProvider provider = new WebDomainVerifierSettingsProvider("Omiya Games/Web Security", SettingsScope.Project);
+            // Check if the asset file is available
+            if (IsSettingsAvailable == false)
+            {
+                // Create the asset here.
+                SettingsHelpers.CreateOmiyaGamesSettings<WebDomainVerifier>(AssetFileName);
+            }
 
-                // Automatically extract all keywords from the Styles.
-                provider.keywords = GetSearchKeywordsFromGUIContentProperties<Styles>();
-                return provider;
-            //}
+            // Create the settings provider
+            WebDomainVerifierSettingsProvider returnProvider = 
+                new WebDomainVerifierSettingsProvider("Project/Omiya Games/Web Security", SettingsScope.Project);
 
-            // Settings Asset doesn't exist yet; no need to display anything in the Settings window.
-            //return null;
+            // Automatically extract all keywords from the Styles.
+            returnProvider.keywords = GetSearchKeywordsFromGUIContentProperties<Styles>();
+            return returnProvider;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public static WebDomainVerifier GetWebDomainVerifier()
+        public static WebDomainVerifier Asset
         {
-            WebDomainVerifier settings = AssetDatabase.LoadAssetAtPath<WebDomainVerifier>(AssetPath);
-            if (settings == null)
-            {
-                settings = ScriptableObject.CreateInstance<WebDomainVerifier>();
-                AssetDatabase.CreateAsset(settings, AssetPath);
-                AssetDatabase.SaveAssets();
-            }
-            return settings;
+            get => SettingsHelpers.GetOmiyaGamesSettings<WebDomainVerifier>(AssetFileName);
         }
 
         /// <summary>
@@ -116,14 +113,14 @@ namespace OmiyaGames.Web.Security.Editor
         /// <returns></returns>
         public static bool IsSettingsAvailable
         {
-            get => File.Exists(AssetPath);
+            get => File.Exists(SettingsHelpers.GetFullOmiyaGamesSettingsPath(AssetFileName));
         }
 
         /// <inheritdoc/>
         public override void OnActivate(string searchContext, VisualElement rootElement)
         {
             // This function is called when the user clicks on the MyCustom element in the Settings window.
-            webDomainVerifier = new SerializedObject(GetWebDomainVerifier());
+            webDomainVerifier = new SerializedObject(Asset);
         }
 
         /// <inheritdoc/>
