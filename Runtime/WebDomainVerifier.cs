@@ -96,8 +96,8 @@ namespace OmiyaGames.Web.Security
     {
         public delegate void OnStateChange(WebDomainVerifier source, State oldState, State newState);
 
-        public event Action<WebDomainVerifier> OnBeforeCheckDomainList;
-        public event Action<WebDomainVerifier> OnAfterCheckDomainList;
+        public event Action<WebDomainVerifier> OnBeforeVerifyWebDomain;
+        public event Action<WebDomainVerifier> OnAfterVerifyWebDomain;
         public event OnStateChange OnBeforeStateChange;
         public event OnStateChange OnAfterStateChange;
 
@@ -330,7 +330,7 @@ namespace OmiyaGames.Web.Security
             StringBuilder buf = new StringBuilder();
 
             // Run event
-            OnBeforeCheckDomainList?.Invoke(this);
+            OnBeforeVerifyWebDomain?.Invoke(this);
 
             // Update properties
             DownloadedDomainList = null;
@@ -385,7 +385,7 @@ namespace OmiyaGames.Web.Security
             CurrentState = GetNewState(AllUniqueDomains, out retrievedHostName);
 
             // Run event
-            OnAfterCheckDomainList?.Invoke(this);
+            OnAfterVerifyWebDomain?.Invoke(this);
 
             // Check if we should force redirecting the player
             if ((forceRedirectIfDomainDoesntMatch == true) && (IsDomainInvalid(CurrentState) == true))
