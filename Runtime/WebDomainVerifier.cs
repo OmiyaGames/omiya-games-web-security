@@ -14,7 +14,7 @@ namespace OmiyaGames.Web.Security
 {
     ///-----------------------------------------------------------------------
     /// <remarks>
-    /// <copyright file="WebLocationChecker.cs" company="Omiya Games">
+    /// <copyright file="WebDomainVerifier.cs" company="Omiya Games">
     /// The MIT License (MIT)
     /// 
     /// Copyright (c) 2020-2020 Omiya Games
@@ -105,8 +105,6 @@ namespace OmiyaGames.Web.Security
         /// Header string for the Unity Inspector.
         /// </summary>
         public const string RemoteDomainListHeader = "Remote Domain List";
-
-        // FIXME: figure out a way to turn this class into a singleton.
 
         /// <summary>
         /// Indicates progression and result of this script.
