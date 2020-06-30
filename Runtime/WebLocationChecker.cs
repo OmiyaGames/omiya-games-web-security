@@ -18,7 +18,7 @@ namespace OmiyaGames.Web.Security
     /// <copyright file="WebLocationChecker.cs" company="Omiya Games">
     /// The MIT License (MIT)
     /// 
-    /// Copyright (c) 2014-2018 Omiya Games
+    /// Copyright (c) 2014-2020 Omiya Games
     /// 
     /// Permission is hereby granted, free of charge, to any person obtaining a copy
     /// of this software and associated documentation files (the "Software"), to deal
@@ -127,6 +127,7 @@ namespace OmiyaGames.Web.Security
     /// </para>
     /// </summary>
     [DisallowMultipleComponent]
+    [Obsolete("Use WebDomainVerifier instead.")]
     public class WebLocationChecker : ISingletonScript
     {
         /// <summary>
