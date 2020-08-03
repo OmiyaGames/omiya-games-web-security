@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="DomainNamesGroup">
+        <ui:Label text="This is a Placeholder Label, to be replaced with a ReorderableList...hopefully." />
+    </ui:VisualElement>
+    <ui:VisualElement>
+        <ui:Label text="Remote Domain List" class="header" style="-unity-font-style: bold;" />
+        <ui:Foldout text="Match Domain From a Downloaded Domain List" name="IsDownloadDomainListEnabled">
+            <ui:TextField picking-mode="Ignore" label="Download URL" text="TemplateData/domains" value="TemplateData/domains" tooltip="URL to download a Domain List from. Can be (and is recommended) local path to root of the WebGL build." name="DownloadDomainListUrl" />
+            <ui:Label text="Placeholder label for Domain List Decrypter" />
+        </ui:Foldout>
+      </ui:VisualElement>
+    <ui:VisualElement name="DomainVerificationFailGroup">
+        <ui:Label text="When Domain Verification Fails" class="header" style="-unity-font-style: bold;" />
+        <ui:Foldout text="Redirect to Another Website" value="true" tooltip="If checked, redirects the browser to a different website." name="IsRedirectingOnFail">
+            <ui:TextField label="Redirect URL" text="https://" name="RedirectUrl" tooltip="The URL to the website to redirect to." value="https://" />
+        </ui:Foldout>
+    </ui:VisualElement>
+</ui:UXML>
