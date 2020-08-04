@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using OmiyaGames.Common.Editor;
 using OmiyaGames.Global.Editor;
+using UnityEditor.UIElements;
 
 namespace OmiyaGames.Web.Security.Editor
 {
@@ -121,13 +122,27 @@ namespace OmiyaGames.Web.Security.Editor
         {
             // This function is called when the user clicks on the MyCustom element in the Settings window.
             webDomainVerifier = new SerializedObject(Asset);
-        }
 
-        /// <inheritdoc/>
-        public override void OnGUI(string searchContext)
-        {
-            // FIXME: do something!
-            EditorGUILayout.LabelField("Testing, testing...");
+            // Import UXML
+            VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.omiyagames.web.security/Editor/WebDomainVerifier.uxml");
+            VisualElement fullTree = visualTree.CloneTree();
+            rootElement.Add(fullTree);
+
+            // Bind the UXML to a serialized object
+            fullTree.Bind(webDomainVerifier);
+
+            // Grab the DownloadDomainListUrl text field, and bind it to the appropriate field.
+            TextField serializedTextField = fullTree.Query<TextField>("DownloadDomainListUrl").First();
+            serializedTextField.bindingPath = "remoteDomainListUrl";
+
+            // Grab the RedirectUrl text field, and bind it to the appropriate field.
+            serializedTextField = fullTree.Query<TextField>("RedirectUrl").First();
+            serializedTextField.bindingPath = "redirectURL";
+
+            // Grab the RedirectUrl text field, and bind it to the appropriate field.
+            // FIXME: change this to a checkbox group
+            Foldout serializedCheckBoxGroup = fullTree.Query<Foldout>("IsRedirectingOnFail").First();
+            serializedCheckBoxGroup.bindingPath = "forceRedirectIfDomainDoesntMatch";
         }
     }
 }
