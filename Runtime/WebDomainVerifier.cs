@@ -165,14 +165,17 @@ namespace OmiyaGames.Web.Security
         ///</summary>
         [Header(RemoteDomainListHeader)]
         [SerializeField]
-        [Tooltip("[optional] The URL to fetch a list of domains")]
-        private string remoteDomainListUrl;
+        private bool downloadRemoteDomainList = true;
+
+        [SerializeField]
+        [Tooltip("The URL to fetch a list of domains")]
+        private string remoteDomainListUrl = "TemplateData/domains";
         /// <summary>
         /// [optional] <see cref="StringCryptographer"/> to decrypt
         /// the downloaded <see cref="DomainList"/>.
         /// </summary>
         [SerializeField]
-        [Tooltip("[optional] The cryptographer that decrypts the encrypted strings in the list of domains")]
+        [Tooltip("The cryptographer that decrypts the encrypted strings in the list of domains")]
         private StringCryptographer domainDecrypter;
 
         ///<summary>
@@ -187,7 +190,7 @@ namespace OmiyaGames.Web.Security
         /// the strings in domainMustContain are found.
         ///</summary>
         [SerializeField]
-        private string redirectURL;
+        private string redirectURL = "https://";
 
         private string retrievedHostName = null;
         private State currentState = State.NotUsed;
@@ -296,6 +299,11 @@ namespace OmiyaGames.Web.Security
         /// <seealso cref="DownloadDomainsUrl"/>
         /// </summary>
         public string RemoteDomainListUrl => remoteDomainListUrl;
+
+        /// <summary>
+        /// True if downloading a domain list from a remote URL.
+        /// </summary>
+        public bool IsDownloadingARemoteDomainList => (downloadRemoteDomainList && (string.IsNullOrWhiteSpace(RemoteDomainListUrl) == false));
         #endregion
 
         /// <summary>
@@ -337,7 +345,7 @@ namespace OmiyaGames.Web.Security
             CurrentState = State.InProgress;
 
             // Grab a domain list remotely
-            if (string.IsNullOrEmpty(RemoteDomainListUrl) == false)
+            if (IsDownloadingARemoteDomainList == true)
             {
                 // Grab remote domain list
                 DownloadDomainsUrl = GenerateRemoteDomainList(buf);
