@@ -92,7 +92,7 @@ namespace OmiyaGames.Web.Security.Editor
             }
 
             // Create the settings provider
-            WebDomainVerifierSettingsProvider returnProvider = 
+            WebDomainVerifierSettingsProvider returnProvider =
                 new WebDomainVerifierSettingsProvider("Project/Omiya Games/Web Security", SettingsScope.Project);
 
             // Automatically extract all keywords from the Styles.
@@ -121,15 +121,10 @@ namespace OmiyaGames.Web.Security.Editor
         public override void OnActivate(string searchContext, VisualElement rootElement)
         {
             // This function is called when the user clicks on the MyCustom element in the Settings window.
-            webDomainVerifier = new SerializedObject(Asset);
-
             // Import UXML
             VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.omiyagames.web.security/Editor/WebDomainVerifier.uxml");
             VisualElement fullTree = visualTree.CloneTree();
             rootElement.Add(fullTree);
-
-            // Bind the UXML to a serialized object
-            fullTree.Bind(webDomainVerifier);
 
             // Grab the DownloadDomainListUrl text field, and bind it to the appropriate field.
             TextField serializedTextField = fullTree.Query<TextField>("DownloadDomainListUrl").First();
@@ -139,10 +134,12 @@ namespace OmiyaGames.Web.Security.Editor
             serializedTextField = fullTree.Query<TextField>("RedirectUrl").First();
             serializedTextField.bindingPath = "redirectURL";
 
-            // Grab the RedirectUrl text field, and bind it to the appropriate field.
-            // FIXME: change this to a checkbox group
-            Foldout serializedCheckBoxGroup = fullTree.Query<Foldout>("IsRedirectingOnFail").First();
-            serializedCheckBoxGroup.bindingPath = "forceRedirectIfDomainDoesntMatch";
+            // FIXME: grab checkbox groups.  Somehow.
+
+            // Bind the UXML to a serialized object
+            // Note: this must be done last
+            webDomainVerifier = new SerializedObject(Asset);
+            rootElement.Bind(webDomainVerifier);
         }
     }
 }
