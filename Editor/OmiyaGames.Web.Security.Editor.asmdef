@@ -3,6 +3,7 @@
     "references": [
         "OmiyaGames.Common.Editor",
         "OmiyaGames.Global.Editor",
+        "OmiyaGames.Cryptography",
         "OmiyaGames.Web.Security"
     ],
     "includePlatforms": [

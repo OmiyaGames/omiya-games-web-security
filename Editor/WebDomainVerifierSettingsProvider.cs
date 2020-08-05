@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 using OmiyaGames.Common.Editor;
 using OmiyaGames.Global.Editor;
 using UnityEditor.UIElements;
+using System;
 
 namespace OmiyaGames.Web.Security.Editor
 {
@@ -133,6 +134,12 @@ namespace OmiyaGames.Web.Security.Editor
             // Grab the RedirectUrl text field, and bind it to the appropriate field.
             serializedTextField = fullTree.Query<TextField>("RedirectUrl").First();
             serializedTextField.bindingPath = "redirectURL";
+
+            // Grab Decrypter object field, and bind it to the appropriate field.
+            ObjectField serializedObjectField = fullTree.Query<ObjectField>("DomainListDecrypter").First();
+            // Note: can't figure out how to get this type in XML properly, so in-code it is.
+            serializedObjectField.objectType = typeof(Cryptography.StringCryptographer);
+            serializedObjectField.bindingPath = "domainDecrypter";
 
             // FIXME: grab checkbox groups.  Somehow.
 
