@@ -1,11 +1,11 @@
 ﻿using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor;
+using UnityEditorInternal;
+using UnityEditor.UIElements;
 using OmiyaGames.Common.Editor;
 using OmiyaGames.Global.Editor;
-using UnityEditor.UIElements;
-using System;
 
 namespace OmiyaGames.Web.Security.Editor
 {
@@ -57,7 +57,25 @@ namespace OmiyaGames.Web.Security.Editor
     public class WebDomainVerifierSettingsProvider : SettingsProvider
     {
         public const string AssetFileName = "WebDomainVerifier.asset";
+        public const string DescriptionMessage = "Any domain string received from any" +
+            " sources (in the list below or" +
+            " a file downloaded from the \"" +
+            WebDomainVerifier.RemoteDomainListHeader + "\" fields) will be compared" +
+            " to the hostname of the website this application's WebGL build is" +
+            " running on. For example, the hostname for \"www.google.com/search?q=help\"" +
+            " is \"www.google.com\", while \"google.com/?search?q=help\" is" +
+            " \"google.com\". The status of this comparison will be set to this script's" +
+            " CurrentState property, and optional redirect the player to" +
+            " a specified website.\n\n" +
+            "Domain string can contain wild cards: * matches a string of characters," +
+            " while ? matches zero or one character. For example, \"*.google.com\"" +
+            " will match \"www.google.com\", \"o.google.com\", and \".google.com\"," +
+            " while \"?.google.com\" will only match \"o.google.com\", and" +
+            " \".google.com\"";
+
         private SerializedObject webDomainVerifier;
+        private SerializedProperty domainMustContain;
+        private ReorderableList domainMustContainList;
 
         private class Styles
         {
@@ -143,10 +161,47 @@ namespace OmiyaGames.Web.Security.Editor
 
             // FIXME: grab checkbox groups.  Somehow.
 
+
+
+
+            // TODO: consider creating an actual custom UXML tag than using an IMGUIContainer
+            IMGUIContainer listContainer = fullTree.Query<IMGUIContainer>("DomainNames").First();
+            listContainer.onGUIHandler += Testing;
+
+            // Setup domainMustContain list
+            webDomainVerifier = new SerializedObject(Asset);
+            domainMustContain = webDomainVerifier.FindProperty("domainMustContain");
+            domainMustContainList = new ReorderableList(webDomainVerifier, domainMustContain, true, true, true, true);
+            domainMustContainList.drawHeaderCallback = DrawDomainHeader;
+            domainMustContainList.drawElementCallback = DrawDomainElement;
+            domainMustContainList.elementHeight = EditorHelpers.SingleLineHeight(EditorHelpers.VerticalMargin);
+
+
+
             // Bind the UXML to a serialized object
             // Note: this must be done last
-            webDomainVerifier = new SerializedObject(Asset);
             rootElement.Bind(webDomainVerifier);
+        }
+
+        private void Testing()
+        {
+            EditorGUILayout.HelpBox(DescriptionMessage, MessageType.None);
+            webDomainVerifier.Update();
+            domainMustContainList.DoLayoutList();
+            webDomainVerifier.ApplyModifiedProperties();
+        }
+
+        private void DrawDomainHeader(Rect rect)
+        {
+            EditorGUI.LabelField(rect, "Domain Must Contain");
+        }
+
+        private void DrawDomainElement(Rect rect, int index, bool isActive, bool isFocused)
+        {
+            SerializedProperty element = domainMustContain.GetArrayElementAtIndex(index);
+            rect.y += EditorHelpers.VerticalMargin;
+            rect.height = EditorGUIUtility.singleLineHeight;
+            EditorGUI.PropertyField(rect, element, GUIContent.none);
         }
     }
 }

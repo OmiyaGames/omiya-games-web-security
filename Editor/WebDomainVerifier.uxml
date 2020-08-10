@@ -2,7 +2,7 @@
     <ui:VisualElement name="DomainNamesGroup">
         <Style src="web-security-style.uss" />
         <ui:Label text="Web Security" name="Title" class="title" />
-        <ui:Label text="This is a Placeholder Label, to be replaced with a ReorderableList...hopefully." />
+        <ui:IMGUIContainer name="DomainNames" />
     </ui:VisualElement>
     <ui:VisualElement name="RemoteDomainListGroup">
         <Style src="web-security-style.uss" />
