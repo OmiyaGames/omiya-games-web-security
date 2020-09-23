@@ -145,19 +145,13 @@ namespace OmiyaGames.Web.Security.Editor
             VisualElement fullTree = visualTree.CloneTree();
             rootElement.Add(fullTree);
 
-            // Grab the DownloadDomainListUrl text field, and bind it to the appropriate field.
-            TextField serializedTextField = fullTree.Query<TextField>("DownloadDomainListUrl").First();
-            serializedTextField.bindingPath = "remoteDomainListUrl";
-
-            // Grab the RedirectUrl text field, and bind it to the appropriate field.
-            serializedTextField = fullTree.Query<TextField>("RedirectUrl").First();
-            serializedTextField.bindingPath = "redirectURL";
-
             // Grab Decrypter object field, and bind it to the appropriate field.
             ObjectField serializedObjectField = fullTree.Query<ObjectField>("DomainListDecrypter").First();
             // Note: can't figure out how to get this type in XML properly, so in-code it is.
             serializedObjectField.objectType = typeof(Cryptography.StringCryptographer);
-            serializedObjectField.bindingPath = "domainDecrypter";
+
+            //serializedObjectField = fullTree.Query<ObjectField>("DomainNames").First();
+            //serializedObjectField.objectType = typeof(string[]);
 
             // FIXME: grab checkbox groups.  Somehow.
 

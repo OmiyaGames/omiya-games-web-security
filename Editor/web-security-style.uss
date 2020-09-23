@@ -7,6 +7,6 @@
     min-height: 8px;
 }
 
-.indent-1 {
+.indent {
     margin-left: 15px;
 }
