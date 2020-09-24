@@ -73,9 +73,8 @@ namespace OmiyaGames.Web.Security.Editor
             " while \"?.google.com\" will only match \"o.google.com\", and" +
             " \".google.com\"";
 
+        private static readonly HelpBox DomainMustContainDescription = new HelpBox(DescriptionMessage, HelpBoxMessageType.None);
         private SerializedObject webDomainVerifier;
-        //private SerializedProperty domainMustContain;
-        //private ReorderableList domainMustContainList;
 
         private class Styles
         {
@@ -142,60 +141,21 @@ namespace OmiyaGames.Web.Security.Editor
             // This function is called when the user clicks on the MyCustom element in the Settings window.
             // Import UXML
             VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.omiyagames.web.security/Editor/WebDomainVerifier.uxml");
+
+            // Apply the UXML to the root element
             VisualElement fullTree = visualTree.CloneTree();
             rootElement.Add(fullTree);
 
-            // Grab Decrypter object field, and bind it to the appropriate field.
-            //ObjectField serializedObjectField = fullTree.Query<ObjectField>("DomainListDecrypter").First();
-            // Note: can't figure out how to get this type in XML properly, so in-code it is.
-            //serializedObjectField.objectType = typeof(Cryptography.StringCryptographer);
-
-            //serializedObjectField = fullTree.Query<ObjectField>("DomainNames").First();
-            //serializedObjectField.objectType = typeof(string[]);
-
-            // FIXME: grab checkbox groups.  Somehow.
-
-
-
-
-            // TODO: consider creating an actual custom UXML tag than using an IMGUIContainer
-            //IMGUIContainer listContainer = fullTree.Query<IMGUIContainer>("DomainNames").First();
-            //listContainer.onGUIHandler += Testing;
-
-            // Setup domainMustContain list
-            webDomainVerifier = new SerializedObject(Asset);
-            //domainMustContain = webDomainVerifier.FindProperty("domainMustContain");
-            //domainMustContainList = new ReorderableList(webDomainVerifier, domainMustContain, true, true, true, true);
-            //domainMustContainList.drawHeaderCallback = DrawDomainHeader;
-            //domainMustContainList.drawElementCallback = DrawDomainElement;
-            //domainMustContainList.elementHeight = EditorHelpers.SingleLineHeight(EditorHelpers.VerticalMargin);
-
-
+            // Insert the info box right above the "domain must contain" list
+            PropertyField domainMustContain = fullTree.Query<PropertyField>("DomainMustContain").First();
+            VisualElement domainListGroup = domainMustContain.parent;
+            int indexToInsert = domainListGroup.IndexOf(domainMustContain);
+            domainListGroup.Insert(indexToInsert, DomainMustContainDescription);
 
             // Bind the UXML to a serialized object
             // Note: this must be done last
+            webDomainVerifier = new SerializedObject(Asset);
             rootElement.Bind(webDomainVerifier);
         }
-
-        //private void Testing()
-        //{
-        //    EditorGUILayout.HelpBox(DescriptionMessage, MessageType.None);
-        //    webDomainVerifier.Update();
-        //    //domainMustContainList.DoLayoutList();
-        //    webDomainVerifier.ApplyModifiedProperties();
-        //}
-
-        //private void DrawDomainHeader(Rect rect)
-        //{
-        //    EditorGUI.LabelField(rect, "Domain Must Contain");
-        //}
-
-        //private void DrawDomainElement(Rect rect, int index, bool isActive, bool isFocused)
-        //{
-        //    SerializedProperty element = domainMustContain.GetArrayElementAtIndex(index);
-        //    rect.y += EditorHelpers.VerticalMargin;
-        //    rect.height = EditorGUIUtility.singleLineHeight;
-        //    EditorGUI.PropertyField(rect, element, GUIContent.none);
-        //}
     }
 }
