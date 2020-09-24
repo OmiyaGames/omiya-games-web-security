@@ -74,8 +74,8 @@ namespace OmiyaGames.Web.Security.Editor
             " \".google.com\"";
 
         private SerializedObject webDomainVerifier;
-        private SerializedProperty domainMustContain;
-        private ReorderableList domainMustContainList;
+        //private SerializedProperty domainMustContain;
+        //private ReorderableList domainMustContainList;
 
         private class Styles
         {
@@ -146,9 +146,9 @@ namespace OmiyaGames.Web.Security.Editor
             rootElement.Add(fullTree);
 
             // Grab Decrypter object field, and bind it to the appropriate field.
-            ObjectField serializedObjectField = fullTree.Query<ObjectField>("DomainListDecrypter").First();
+            //ObjectField serializedObjectField = fullTree.Query<ObjectField>("DomainListDecrypter").First();
             // Note: can't figure out how to get this type in XML properly, so in-code it is.
-            serializedObjectField.objectType = typeof(Cryptography.StringCryptographer);
+            //serializedObjectField.objectType = typeof(Cryptography.StringCryptographer);
 
             //serializedObjectField = fullTree.Query<ObjectField>("DomainNames").First();
             //serializedObjectField.objectType = typeof(string[]);
@@ -159,16 +159,16 @@ namespace OmiyaGames.Web.Security.Editor
 
 
             // TODO: consider creating an actual custom UXML tag than using an IMGUIContainer
-            IMGUIContainer listContainer = fullTree.Query<IMGUIContainer>("DomainNames").First();
-            listContainer.onGUIHandler += Testing;
+            //IMGUIContainer listContainer = fullTree.Query<IMGUIContainer>("DomainNames").First();
+            //listContainer.onGUIHandler += Testing;
 
             // Setup domainMustContain list
             webDomainVerifier = new SerializedObject(Asset);
-            domainMustContain = webDomainVerifier.FindProperty("domainMustContain");
-            domainMustContainList = new ReorderableList(webDomainVerifier, domainMustContain, true, true, true, true);
-            domainMustContainList.drawHeaderCallback = DrawDomainHeader;
-            domainMustContainList.drawElementCallback = DrawDomainElement;
-            domainMustContainList.elementHeight = EditorHelpers.SingleLineHeight(EditorHelpers.VerticalMargin);
+            //domainMustContain = webDomainVerifier.FindProperty("domainMustContain");
+            //domainMustContainList = new ReorderableList(webDomainVerifier, domainMustContain, true, true, true, true);
+            //domainMustContainList.drawHeaderCallback = DrawDomainHeader;
+            //domainMustContainList.drawElementCallback = DrawDomainElement;
+            //domainMustContainList.elementHeight = EditorHelpers.SingleLineHeight(EditorHelpers.VerticalMargin);
 
 
 
@@ -177,25 +177,25 @@ namespace OmiyaGames.Web.Security.Editor
             rootElement.Bind(webDomainVerifier);
         }
 
-        private void Testing()
-        {
-            EditorGUILayout.HelpBox(DescriptionMessage, MessageType.None);
-            webDomainVerifier.Update();
-            domainMustContainList.DoLayoutList();
-            webDomainVerifier.ApplyModifiedProperties();
-        }
+        //private void Testing()
+        //{
+        //    EditorGUILayout.HelpBox(DescriptionMessage, MessageType.None);
+        //    webDomainVerifier.Update();
+        //    //domainMustContainList.DoLayoutList();
+        //    webDomainVerifier.ApplyModifiedProperties();
+        //}
 
-        private void DrawDomainHeader(Rect rect)
-        {
-            EditorGUI.LabelField(rect, "Domain Must Contain");
-        }
+        //private void DrawDomainHeader(Rect rect)
+        //{
+        //    EditorGUI.LabelField(rect, "Domain Must Contain");
+        //}
 
-        private void DrawDomainElement(Rect rect, int index, bool isActive, bool isFocused)
-        {
-            SerializedProperty element = domainMustContain.GetArrayElementAtIndex(index);
-            rect.y += EditorHelpers.VerticalMargin;
-            rect.height = EditorGUIUtility.singleLineHeight;
-            EditorGUI.PropertyField(rect, element, GUIContent.none);
-        }
+        //private void DrawDomainElement(Rect rect, int index, bool isActive, bool isFocused)
+        //{
+        //    SerializedProperty element = domainMustContain.GetArrayElementAtIndex(index);
+        //    rect.y += EditorHelpers.VerticalMargin;
+        //    rect.height = EditorGUIUtility.singleLineHeight;
+        //    EditorGUI.PropertyField(rect, element, GUIContent.none);
+        //}
     }
 }

@@ -3,15 +3,15 @@
         <Style src="web-security-style.uss" />
         <ui:VisualElement name="DomainNamesGroup">
             <ui:Label text="Web Security" name="Title" class="title" />
-            <ui:IMGUIContainer name="DomainNames" />
-            <OmiyaGames.Common.Editor.ReorderableStringList text="Domain Must Contain" name="TestDomainNames" binding-path="domainMustContain"/>
+            <!-- <uie:HelpBox text="Any domain string received from any sources (in the list below or a file downloaded from the &quot;Remote Domain List&quot; fields) will be compared to the hostname of the website this application's WebGL build is running on. For example, the hostname for &quot;www.google.com/search?q=help&quot; is &quot;www.google.com&quot;, while &quot;google.com/?search?q=help&quot; is &quot;google.com&quot;. The status of this comparison will be set to this script's CurrentState property, and optional redirect the player to a specified website.\n\n Domain string can contain wild cards: * matches a string of characters, while ? matches zero or one character. For example, &quot;*.google.com&quot; will match &quot;www.google.com&quot;, &quot;o.google.com&quot;, and &quot;.google.com&quot;, while &quot;?.google.com&quot; will only match &quot;o.google.com&quot;, and &quot;.google.com&quot;" /> -->
+            <uie:PropertyField text="Domain Must Contain" name="TestDomainNames" binding-path="domainMustContain" />
         </ui:VisualElement>
         <OmiyaGames.Common.Editor.Spacer />
         <ui:VisualElement name="RemoteDomainListGroup" class="indent">
             <ui:Label text="Remote Domain List" class="header" style="-unity-font-style: bold;" />
             <ui:Foldout text="Download a Domain List" name="IsDownloadDomainListEnabled">
                 <ui:TextField label="Download URL" text="TemplateData/domains" value="TemplateData/domains" tooltip="URL to download a Domain List from. Can be (and is recommended) local path to root of the WebGL build." name="DownloadDomainListUrl" binding-path="remoteDomainListUrl" />
-                <uie:ObjectField label="Decrypter" name="DomainListDecrypter" tooltip="If the downloaded DomainList is encrypted, this object will decrypt its content." allow-scene-objects="false" binding-path="domainDecrypter" />
+                <uie:PropertyField label="Decrypter" name="DomainListDecrypter" tooltip="If the downloaded DomainList is encrypted, this object will decrypt its content." allow-scene-objects="false" binding-path="domainDecrypter" />
             </ui:Foldout>
         </ui:VisualElement>
         <OmiyaGames.Common.Editor.Spacer />
