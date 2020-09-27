@@ -10,9 +10,9 @@
             <ui:VisualElement name="RemoteDomainListGroup" class="indent">
                 <ui:Label text="Remote Domain List" class="header" style="-unity-font-style: bold;" />
                 <ui:Toggle value="true" text="Download a Remote Domain List" name="IsDownloadDomainListEnabled" tooltip="If checked, downloads a domain list from a specified URL. Without http, downloads relative from the folder WebGL build&apos;s &quot;index.html&quot; is placed." binding-path="downloadRemoteDomainList" />
-                <ui:VisualElement name="RemoteDomainListGroup" class="indent">
-                    <uie:PropertyField label="Decrypter" name="DomainListDecrypter" tooltip="If the downloaded DomainList is encrypted, this object will decrypt its content." allow-scene-objects="false" binding-path="domainDecrypter" />
-                    <ui:TextField label="Download URL" text="TemplateData/domains" value="TemplateData/domains" tooltip="URL to download a Domain List from. Can be (and is recommended) local path to root of the WebGL build." name="DownloadDomainListUrl" binding-path="remoteDomainListUrl" />
+                <ui:VisualElement name="DownloadPropertiesGroup" class="indent">
+                  <ui:TextField label="Download URL" text="TemplateData/domains" value="TemplateData/domains" tooltip="URL to download a Domain List from. Can be (and is recommended) local path to root of the WebGL build." name="DownloadDomainListUrl" binding-path="remoteDomainListUrl" />
+                  <uie:PropertyField label="Decrypter" name="DomainListDecrypter" tooltip="If the downloaded DomainList is encrypted, this object will decrypt its content." allow-scene-objects="false" binding-path="domainDecrypter" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <oge:Spacer />

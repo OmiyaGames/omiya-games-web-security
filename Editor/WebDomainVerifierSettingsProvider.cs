@@ -2,9 +2,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEditor.UIElements;
-using OmiyaGames.Common.Editor;
 using OmiyaGames.Global.Editor;
 
 namespace OmiyaGames.Web.Security.Editor
@@ -74,6 +72,9 @@ namespace OmiyaGames.Web.Security.Editor
             " \".google.com\"";
 
         private static readonly HelpBox DomainMustContainDescription = new HelpBox(DescriptionMessage, HelpBoxMessageType.None);
+        /// <summary>
+        /// The actual asset we're modifying.
+        /// </summary>
         private SerializedObject webDomainVerifier;
 
         private class Styles
@@ -146,16 +147,42 @@ namespace OmiyaGames.Web.Security.Editor
             VisualElement fullTree = visualTree.CloneTree();
             rootElement.Add(fullTree);
 
+            // Update class of helpbox to match DomainMustContain
+            PropertyField domainMustContain = fullTree.Q<PropertyField>("DomainMustContain");
+            foreach (string className in domainMustContain.GetClasses())
+            {
+                if (DomainMustContainDescription.ClassListContains(className) == false)
+                {
+                    DomainMustContainDescription.AddToClassList(className);
+                }
+            }
+
             // Insert the info box right above the "domain must contain" list
-            PropertyField domainMustContain = fullTree.Query<PropertyField>("DomainMustContain").First();
-            VisualElement domainListGroup = domainMustContain.parent;
-            int indexToInsert = domainListGroup.IndexOf(domainMustContain);
-            domainListGroup.Insert(indexToInsert, DomainMustContainDescription);
+            VisualElement uiGroup = domainMustContain.parent;
+            int indexToInsert = uiGroup.IndexOf(domainMustContain);
+            uiGroup.Insert(indexToInsert, DomainMustContainDescription);
+
+            // Update the toggles to enable/disable UI groups
+            BindToggleToUiGroup(fullTree, "IsDownloadDomainListEnabled", "DownloadPropertiesGroup");
+            BindToggleToUiGroup(fullTree, "IsRedirectingOnFail", "RedirectToGroup");
 
             // Bind the UXML to a serialized object
             // Note: this must be done last
             webDomainVerifier = new SerializedObject(Asset);
             rootElement.Bind(webDomainVerifier);
+        }
+
+        private static void BindToggleToUiGroup(VisualElement fullTree, string toggleName, string uiGroupName)
+        {
+            // Grab the respective controls
+            Toggle checkbox = fullTree.Q<Toggle>(toggleName);
+            VisualElement uiGroup = fullTree.Q<VisualElement>(uiGroupName);
+
+            // First, update the UI group to match the toggle's state
+            uiGroup.SetEnabled(checkbox.value);
+
+            // Register the checkbox event to update the controls
+            checkbox.RegisterValueChangedCallback((ChangeEvent<bool> isEnabled) => uiGroup.SetEnabled(isEnabled.newValue));
         }
     }
 }
