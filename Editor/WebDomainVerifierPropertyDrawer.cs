@@ -1,9 +1,5 @@
-﻿using System.IO;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 using UnityEditor;
-using UnityEditor.UIElements;
-using OmiyaGames.Global.Editor;
 using OmiyaGames.Common.Editor;
 
 namespace OmiyaGames.Web.Security.Editor
@@ -56,9 +52,9 @@ namespace OmiyaGames.Web.Security.Editor
     [CustomPropertyDrawer(typeof(WebDomainVerifier))]
     public class WebDomainVerifierPropertyDrawer : PropertyDrawer
     {
-        public const string ResetButtonText = "Reset";
+        private static readonly GUIContent ResetButtonText = new GUIContent("Reset", "Click if this field is set incorrectly (e.g. <missing>).");
         public const float ResetButtonWidth = 50f;
-        public const string EditButtonText = "Edit";
+        private static readonly GUIContent EditButtonText = new GUIContent("Edit", "Edits Domain Verifier via Project Settings dialog.");
         public const float EditButtonWidth = 50f;
         public const float HorizontalMargin = EditorHelpers.VerticalMargin;
 
@@ -80,7 +76,7 @@ namespace OmiyaGames.Web.Security.Editor
             Rect objectPosition = position;
             objectPosition.width -= (HorizontalMargin + ResetButtonWidth + HorizontalMargin + EditButtonWidth);
 
-            // Draw the object field
+            // Draw the (disabled) object field
             bool isGuiEnabled = GUI.enabled;
             GUI.enabled = false;
             EditorGUI.ObjectField(objectPosition, property);
