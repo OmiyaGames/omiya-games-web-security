@@ -54,7 +54,9 @@ namespace OmiyaGames.Web.Security.Editor
     /// </summary>
     public class WebDomainVerifierSettingsProvider : SettingsProvider
     {
+        public const string ProjectSettingsPath = "Project/Omiya Games/Web Security";
         public const string AssetFileName = "WebDomainVerifier.asset";
+        public const string UxmlPath = "Packages/com.omiyagames.web.security/Editor/WebDomainVerifier.uxml";
         public const string DescriptionMessage = "Any domain string received from any" +
             " sources (in the list below or" +
             " a file downloaded from the \"" +
@@ -112,7 +114,7 @@ namespace OmiyaGames.Web.Security.Editor
 
             // Create the settings provider
             WebDomainVerifierSettingsProvider returnProvider =
-                new WebDomainVerifierSettingsProvider("Project/Omiya Games/Web Security", SettingsScope.Project);
+                new WebDomainVerifierSettingsProvider(ProjectSettingsPath, SettingsScope.Project);
 
             // Automatically extract all keywords from the Styles.
             returnProvider.keywords = GetSearchKeywordsFromGUIContentProperties<Styles>();
@@ -141,7 +143,7 @@ namespace OmiyaGames.Web.Security.Editor
         {
             // This function is called when the user clicks on the MyCustom element in the Settings window.
             // Import UXML
-            VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.omiyagames.web.security/Editor/WebDomainVerifier.uxml");
+            VisualTreeAsset visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(UxmlPath);
 
             // Apply the UXML to the root element
             VisualElement fullTree = visualTree.CloneTree();
