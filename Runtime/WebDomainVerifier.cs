@@ -94,6 +94,7 @@ namespace OmiyaGames.Web.Security
     /// </summary>
     public class WebDomainVerifier : ScriptableObject
     {
+        public const string ProjectSettingsPath = "Project/Omiya Games/Web Security";
         public delegate void OnStateChange(WebDomainVerifier source, State oldState, State newState);
 
         public event Action<WebDomainVerifier> OnBeforeVerifyWebDomain;

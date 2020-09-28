@@ -91,7 +91,7 @@ namespace OmiyaGames.Web.Security.Editor
             if (GUI.Button(buttonPosition, EditButtonText) == true)
             {
                 // Open Project Settings
-                SettingsService.OpenProjectSettings(WebDomainVerifierSettingsProvider.ProjectSettingsPath);
+                SettingsService.OpenProjectSettings(WebDomainVerifier.ProjectSettingsPath);
             }
 
             // Determine Rects for reset button

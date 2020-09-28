@@ -54,7 +54,6 @@ namespace OmiyaGames.Web.Security.Editor
     /// </summary>
     public class WebDomainVerifierSettingsProvider : SettingsProvider
     {
-        public const string ProjectSettingsPath = "Project/Omiya Games/Web Security";
         public const string AssetFileName = "WebDomainVerifier.asset";
         public const string UxmlPath = "Packages/com.omiyagames.web.security/Editor/WebDomainVerifier.uxml";
         public const string DescriptionMessage = "Any domain string received from any" +
@@ -114,7 +113,7 @@ namespace OmiyaGames.Web.Security.Editor
 
             // Create the settings provider
             WebDomainVerifierSettingsProvider returnProvider =
-                new WebDomainVerifierSettingsProvider(ProjectSettingsPath, SettingsScope.Project);
+                new WebDomainVerifierSettingsProvider(WebDomainVerifier.ProjectSettingsPath, SettingsScope.Project);
 
             // Automatically extract all keywords from the Styles.
             returnProvider.keywords = GetSearchKeywordsFromGUIContentProperties<Styles>();
