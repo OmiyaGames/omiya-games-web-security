@@ -1,5 +1,9 @@
 # Change Log:
 
+## 0.2.0-preview.1
+
+- New Feature #1: Created [`WebDomainVerifier`](https://github.com/OmiyaGames/omiya-games-web-security/blob/master/Runtime/WebDomainVerifier.cs), an asset that is auto-created in the project, and will appear on the Project Settings window.
+
 ## 0.1.1-preview.1
 
 - Fix: Scripting API documentation for [`WebLocationChecker`](https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.WebLocationChecker.html) should now display.  This was due to accidentally creating unknown XML tags in the comments.
