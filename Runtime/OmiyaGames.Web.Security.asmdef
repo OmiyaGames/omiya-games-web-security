@@ -4,10 +4,7 @@
         "OmiyaGames.Global",
         "OmiyaGames.Cryptography"
     ],
-    "includePlatforms": [
-        "Editor",
-        "WebGL"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

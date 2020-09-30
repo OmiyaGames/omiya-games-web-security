@@ -95,10 +95,12 @@ namespace OmiyaGames.Web.Security
     public class WebDomainVerifier : ScriptableObject
     {
         public const string ProjectSettingsPath = "Project/Omiya Games/Web Security";
-        public delegate void OnStateChange(WebDomainVerifier source, State oldState, State newState);
 
-        public event Action<WebDomainVerifier> OnBeforeVerifyWebDomain;
-        public event Action<WebDomainVerifier> OnAfterVerifyWebDomain;
+        public delegate void OnVerifyWebDomain(WebDomainVerifier source, VerifyEventArgs args);
+        public delegate void OnStateChange(WebDomainVerifier source, StateChangeEventArgs args);
+
+        public event OnVerifyWebDomain OnBeforeVerifyWebDomain;
+        public event OnVerifyWebDomain OnAfterVerifyWebDomain;
         public event OnStateChange OnBeforeStateChange;
         public event OnStateChange OnAfterStateChange;
 
@@ -208,15 +210,17 @@ namespace OmiyaGames.Web.Security
             {
                 if (value != currentState)
                 {
+                    // Set event arguments
+                    StateChangeEventArgs args = new StateChangeEventArgs(currentState, value);
+
                     // Call event
-                    OnBeforeStateChange?.Invoke(this, currentState, value);
+                    OnBeforeStateChange?.Invoke(this, args);
 
                     // Update state value
-                    State oldState = currentState;
                     currentState = value;
 
                     // Call event
-                    OnAfterStateChange?.Invoke(this, oldState, currentState);
+                    OnAfterStateChange?.Invoke(this, args);
                 }
             }
         }
@@ -311,6 +315,9 @@ namespace OmiyaGames.Web.Security
         /// Makes the build redirect the browser to <see cref="redirectURL"/>.
         /// <seealso cref="RedirectTo(String)"/>
         /// </summary>
+        /// <exception cref="PlatformNotSupportedException">
+        /// Thrown when the runtime build isn't a <see cref="RuntimePlatform.WebGLPlayer"/>.
+        /// </exception>
         public void ForceRedirect()
         {
 #if UNITY_WEBGL
@@ -318,6 +325,8 @@ namespace OmiyaGames.Web.Security
             {
                 RedirectTo(redirectURL);
             }
+#else
+            throw new PlatformNotSupportedException("Redirect is only supported on WebGL builds");
 #endif
         }
 
@@ -331,13 +340,18 @@ namespace OmiyaGames.Web.Security
         /// </code>
         /// </summary>
         /// <returns>An enumerator for a coroutine.</returns>
+        /// <exception cref="PlatformNotSupportedException">
+        /// Thrown when the runtime build isn't a <see cref="RuntimePlatform.WebGLPlayer"/>.
+        /// </exception>
         public IEnumerator VerifyWebDomain()
         {
+#if UNITY_WEBGL
             // Setup variables
             StringBuilder buf = new StringBuilder();
+            VerifyEventArgs args = new VerifyEventArgs();
 
             // Run event
-            OnBeforeVerifyWebDomain?.Invoke(this);
+            OnBeforeVerifyWebDomain?.Invoke(this, args);
 
             // Update properties
             DownloadedDomainList = null;
@@ -392,13 +406,17 @@ namespace OmiyaGames.Web.Security
             CurrentState = GetNewState(AllUniqueDomains, out retrievedHostName);
 
             // Run event
-            OnAfterVerifyWebDomain?.Invoke(this);
+            args.EndTime = Time.realtimeSinceStartup;
+            OnAfterVerifyWebDomain?.Invoke(this, args);
 
             // Check if we should force redirecting the player
             if ((forceRedirectIfDomainDoesntMatch == true) && (IsDomainInvalid(CurrentState) == true))
             {
                 ForceRedirect();
             }
+#else
+            throw new PlatformNotSupportedException("Verify web domain is only supported on WebGL builds");
+#endif
         }
 
         #region Helper Static Methods
@@ -509,9 +527,9 @@ namespace OmiyaGames.Web.Security
             }
             return returnState;
         }
-        #endregion
+#endregion
 
-        #region Helper Local Methods
+#region Helper Local Methods
         string GenerateRemoteDomainList(StringBuilder buf)
         {
             buf.Length = 0;
@@ -520,6 +538,6 @@ namespace OmiyaGames.Web.Security
             buf.Append(UnityEngine.Random.Range(0, int.MaxValue));
             return buf.ToString();
         }
-        #endregion
+#endregion
     }
 }
