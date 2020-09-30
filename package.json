@@ -2,8 +2,8 @@
   "name": "com.omiyagames.web.security",
   "displayName": "Omiya Games - Web Security",
   "version": "0.1.1-preview.1",
-  "unity": "2019.3",
-  "unityRelease": "13f1",
+  "unity": "2020.1",
+  "unityRelease": "6f1",
   "description": "Collection of tools for web security.",
   "category": "Tool",
   "type": "tool",
@@ -29,9 +29,13 @@
   ],
   "samples": [
     {
-      "displayName": "Debug WebLocationChecker Scene",
-      "description": "IMPORTANT: this sample relies on TextMeshPro! Scene and script that displays debugging info on WebLocationChecker.",
-      "path": "Samples~/DebugWebLocationChecker"
+      "displayName": "WebDomainVerifier Sample",
+      "description": "Provides an example of how to use the WebDomainVerifier to defend your WebGL game.",
+      "path": "Samples~/WebDomainVerifier/Sample"
+    }, {
+      "displayName": "WebDomainVerifier Debug Info",
+      "description": "Provides a scene that prints a large amount of info from WebDomainVerifier. Great for debugging!",
+      "path": "Samples~/WebDomainVerifier/Debug Info"
     }
   ],
   "scopedRegistries": [
