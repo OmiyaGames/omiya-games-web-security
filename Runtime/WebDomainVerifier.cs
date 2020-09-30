@@ -94,14 +94,33 @@ namespace OmiyaGames.Web.Security
     /// </summary>
     public class WebDomainVerifier : ScriptableObject
     {
+        /// <summary>
+        /// Path where this asset will be created.
+        /// </summary>
         public const string ProjectSettingsPath = "Project/Omiya Games/Web Security";
 
         public delegate void OnVerifyWebDomain(WebDomainVerifier source, VerifyEventArgs args);
         public delegate void OnStateChange(WebDomainVerifier source, StateChangeEventArgs args);
 
+        /// <summary>
+        /// Called just as the <see cref="VerifyWebDomain"/> coroutine
+        /// starts processing.
+        /// </summary>
         public event OnVerifyWebDomain OnBeforeVerifyWebDomain;
+        /// <summary>
+        /// Called around when the <see cref="VerifyWebDomain"/> coroutine
+        /// finishes.
+        /// </summary>
         public event OnVerifyWebDomain OnAfterVerifyWebDomain;
+        /// <summary>
+        /// Called right before <see cref="CurrentState"/>
+        /// changes to a new value.
+        /// </summary>
         public event OnStateChange OnBeforeStateChange;
+        /// <summary>
+        /// Called right after <see cref="CurrentState"/>
+        /// changes to a new value.
+        /// </summary>
         public event OnStateChange OnAfterStateChange;
 
         /// <summary>
@@ -162,30 +181,23 @@ namespace OmiyaGames.Web.Security
         ///</summary>
         [SerializeField]
         private string[] domainMustContain;
-
         ///<summary>
         /// [optional] The URL to fetch a list of domains
         ///</summary>
-        [Header(RemoteDomainListHeader)]
         [SerializeField]
         private bool downloadRemoteDomainList = true;
-
         [SerializeField]
-        [Tooltip("The URL to fetch a list of domains")]
         private string remoteDomainListUrl = "TemplateData/domains";
         /// <summary>
         /// [optional] <see cref="StringCryptographer"/> to decrypt
         /// the downloaded <see cref="DomainList"/>.
         /// </summary>
         [SerializeField]
-        [Tooltip("The cryptographer that decrypts the encrypted strings in the list of domains")]
         private StringCryptographer domainDecrypter;
-
         ///<summary>
         /// If true, the game will force the webplayer to redirect to
         /// the URL below
         ///</summary>
-        [Header("Redirect Options")]
         [SerializeField]
         private bool forceRedirectIfDomainDoesntMatch = true;
         ///<summary>
