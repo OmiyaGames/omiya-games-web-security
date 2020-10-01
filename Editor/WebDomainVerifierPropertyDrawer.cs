@@ -79,7 +79,7 @@ namespace OmiyaGames.Web.Security.Editor
             // Draw the (disabled) object field
             bool isGuiEnabled = GUI.enabled;
             GUI.enabled = false;
-            EditorGUI.ObjectField(objectPosition, property);
+            EditorGUI.ObjectField(objectPosition, property, label);
             GUI.enabled = isGuiEnabled;
 
             // Determine Rects for edit button
