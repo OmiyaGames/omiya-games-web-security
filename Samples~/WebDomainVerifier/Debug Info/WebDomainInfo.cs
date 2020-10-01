@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Text;
 using System.Collections;
-using OmiyaGames.Global;
 
-namespace OmiyaGames.Web.Security
+// Namespace WebDomainVerifier is in
+using OmiyaGames.Web.Security;
+
+namespace Sample
 {
     ///-----------------------------------------------------------------------
-    /// <copyright file="WebLocationInfo.cs" company="Omiya Games">
+    /// <copyright file="WebDomainInfo.cs" company="Omiya Games">
     /// The MIT License (MIT)
     /// 
-    /// Copyright (c) 2014-2018 Omiya Games
+    /// Copyright (c) 2014-2020 Omiya Games
     /// 
     /// Permission is hereby granted, free of charge, to any person obtaining a copy
     /// of this software and associated documentation files (the "Software"), to deal
@@ -39,53 +41,55 @@ namespace OmiyaGames.Web.Security
     /// Revision History:
     /// <list type="table">
     /// <listheader>
-    /// <description>Date</description>
-    /// <description>Name</description>
+    /// <term>Revision</term>
     /// <description>Description</description>
     /// </listheader>
     /// <item>
-    /// <description>>6/13/2018</description>
-    /// <description>Taro</description>
-    /// <description>Initial version.</description>
+    /// <term>
+    /// <strong>Date:</strong> 6/13/2018<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>Initial verison.</description>
+    /// </item>
+    /// <item>
+    /// <term>
+    /// <strong>Date:</strong> 9/27/2020<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>Updated to use <see cref="WebDomainVerifier"/>.</description>
     /// </item>
     /// </list>
     /// </remarks>
-    public class WebLocationInfo : MonoBehaviour
+    public class WebDomainInfo : MonoBehaviour
     {
         const string ForWebGlMessage = "This menu is meant to provide information for WebGL builds.";
         const string LoadingMessage = "Loading web information...";
 
         [SerializeField]
-        TMPro.TextMeshProUGUI infoLabel;
+        UnityEngine.UI.Text infoLabel;
+        /// <summary>
+        /// This field is auto-set by <see cref="WebDomainVerifier"/>'s <see cref="UnityEditor.PropertyDrawer"/>.
+        /// </summary>
+        [SerializeField]
+        WebDomainVerifier domainVerifier;
 
         // Use this for initialization
         IEnumerator Start()
         {
-            // Grab the web checker
-            WebLocationChecker webChecker = null;
-            if (Singleton.Instance.IsWebApp == true)
-            {
-                webChecker = Singleton.Get<WebLocationChecker>();
-            }
+            // By default, set the label to indicate this isn't a web build.
+            infoLabel.text = ForWebGlMessage;
 
-            // Grab information about webChecker
-            if(webChecker != null)
+            // Check if this is a web build
+            if ((domainVerifier != null) && (Application.platform == RuntimePlatform.WebGLPlayer))
             {
                 // Print that we're loading
                 infoLabel.text = LoadingMessage;
 
-                // Wait until the WebLocationChecker is done
-                while(webChecker.CurrentState == WebLocationChecker.State.InProgress)
-                {
-                    yield return null;
-                }
+                // Start the verification process
+                yield return StartCoroutine(domainVerifier.VerifyWebDomain());
 
                 // Update the reason for this dialog to appear
-                infoLabel.text = DebugWebLocation.GetDebugMessage(new StringBuilder(), webChecker);
-            }
-            else
-            {
-                infoLabel.text = ForWebGlMessage;
+                infoLabel.text = DebugWebDomainInfo.GetDebugMessage(domainVerifier, new StringBuilder());
             }
         }
     }

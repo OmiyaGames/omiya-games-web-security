@@ -57,6 +57,7 @@ namespace OmiyaGames.UI.Web
     /// Editor script for <see cref="WebLocationChecker">
     /// </summary>
     [CustomEditor(typeof(WebLocationChecker))]
+    [System.Obsolete("Use WebDomainVerifierSettingsProvider instead.")]
     public class WebLocationCheckerEditor : Editor
     {
         const string AcceptedDomainsFieldName = "Domain Names To Accept By Default";

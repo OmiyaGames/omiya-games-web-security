@@ -45,17 +45,17 @@ namespace OmiyaGames.Web.Security
     ///-----------------------------------------------------------------------
     /// <summary>
     /// Helper debug methods for OmiyaGames.Web.Security namespace.
-    /// <seealso cref="WebLocationChecker"/>
+    /// <seealso cref="WebDomainVerifier"/>
     /// </summary>
-    public static class DebugWebLocation
+    public static class DebugWebDomainInfo
     {
         /// <summary>
         /// Generates a debug message based on info about <paramref name="webChecker"/>
         /// </summary>
-        /// <param name="builder"></param>
         /// <param name="webChecker"></param>
+        /// <param name="builder"></param>
         /// <returns></returns>
-        public static string GetDebugMessage(StringBuilder builder, WebLocationChecker webChecker)
+        public static string GetDebugMessage(WebDomainVerifier webChecker, StringBuilder builder)
         {
             builder.AppendLine("Information according to the WebLocationChecker:");
 

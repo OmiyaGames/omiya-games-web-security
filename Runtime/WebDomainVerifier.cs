@@ -9,16 +9,15 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 #endif
 using OmiyaGames.Cryptography;
-using OmiyaGames.Global;
 
 namespace OmiyaGames.Web.Security
 {
     ///-----------------------------------------------------------------------
     /// <remarks>
-    /// <copyright file="WebLocationChecker.cs" company="Omiya Games">
+    /// <copyright file="WebDomainVerifier.cs" company="Omiya Games">
     /// The MIT License (MIT)
     /// 
-    /// Copyright (c) 2014-2020 Omiya Games
+    /// Copyright (c) 2020-2020 Omiya Games
     /// 
     /// Permission is hereby granted, free of charge, to any person obtaining a copy
     /// of this software and associated documentation files (the "Software"), to deal
@@ -45,42 +44,11 @@ namespace OmiyaGames.Web.Security
     /// </listheader>
     /// <item>
     /// <term>
-    /// <strong>Date:</strong> 5/15/2016<br/>
+    /// <strong>Version:</strong> 0.2.0-preview.1<br/>
+    /// <strong>Date:</strong> 6/29/2020<br/>
     /// <strong>Author:</strong> Taro Omiya
     /// </term>
     /// <description>Initial verison.</description>
-    /// </item><item>
-    /// <term>
-    /// <strong>Date:</strong> 6/5/2018<br/>
-    /// <strong>Author:</strong> Taro Omiya
-    /// </term>
-    /// <description>Removed plain-text support.</description>
-    /// </item><item>
-    /// <term>
-    /// <strong>Date:</strong> 2/12/2019<br/>
-    /// <strong>Author:</strong> Taro Omiya
-    /// </term>
-    /// <description>
-    /// Adding encryption support of the binary <see cref="DomainList"/>.
-    /// </description>
-    /// </item><item>
-    /// <term>
-    /// <strong>Version:</strong> 0.1.0-preview.1<br/>
-    /// <strong>Date:</strong> 5/20/2020<br/>
-    /// <strong>Author:</strong> Taro Omiya
-    /// </term>
-    /// <description>
-    /// Converting to package. Improving documentation for DocFX support.
-    /// </description>
-    /// </item><item>
-    /// <term>
-    /// <strong>Version:</strong> 0.1.1-preview.1<br/>
-    /// <strong>Date:</strong> 5/22/2020<br/>
-    /// <strong>Author:</strong> Taro Omiya
-    /// </term>
-    /// <description>
-    /// Fixing documentation to actually be XML-compliant
-    /// </description>
     /// </item>
     /// </list>
     /// </remarks>
@@ -93,9 +61,8 @@ namespace OmiyaGames.Web.Security
     /// Extra modifications by jcx from Github:<br/>
     /// https://gist.github.com/jcx/93a3fc93531911add8a8
     /// </para><para>
-    /// Add this script to an object in the first scene of your game.
-    /// For WebGL builds, this script grabs the domain the game is running on,
-    /// and verifies it against two lists:
+    /// For WebGL builds, this script grabs the domain of the website this
+    /// game is running on, and verifies it against two lists:
     /// <list type="number">
     /// <item><description>
     /// The list of strings in <see cref="DefaultDomainList"/>.
@@ -110,26 +77,52 @@ namespace OmiyaGames.Web.Security
     /// to help decrypt the content of the list.
     /// </description></item>
     /// </list>
-    /// Don't forget to run the <see cref="CheckDomainList()"/> coroutine! When
+    /// Don't forget to run the <see cref="VerifyWebDomain()"/> coroutine! When
     /// it finished, the <see cref="CurrentState"/> will be set, indicating
     /// whether a match was found or not. Here's an example:
     /// <code>
+    /// [SerializeField]
+    /// private WebDomainVerifier domainVerifier;
+    /// 
     /// IEnumerator Start()
     /// {
-    ///     WebLocationChecker checker = GetComponent&lt;WebLocationChecker&gt;();
-    ///     yield return StartCoroutine(checker.CheckDomainList());
-    ///     Debug.Log(checker.CurrentState);
+    ///     yield return StartCoroutine(domainVerifier.VerifyWebDomain());
+    ///     Debug.Log(domainVerifier.CurrentState);
     /// }
     /// </code>
-    /// If the script is attached to a <see cref="GameObject"/> with
-    /// <see cref="Singleton"/> already attached, the above example code
-    /// will run automatically on <see cref="SceneAwake"/>.
     /// </para>
     /// </summary>
-    [DisallowMultipleComponent]
-    [Obsolete("Use WebDomainVerifier instead.")]
-    public class WebLocationChecker : ISingletonScript
+    public class WebDomainVerifier : ScriptableObject
     {
+        /// <summary>
+        /// Path where this asset will be created.
+        /// </summary>
+        public const string ProjectSettingsPath = "Project/Omiya Games/Web Security";
+
+        public delegate void OnVerifyWebDomain(WebDomainVerifier source, VerifyEventArgs args);
+        public delegate void OnStateChange(WebDomainVerifier source, StateChangeEventArgs args);
+
+        /// <summary>
+        /// Called just as the <see cref="VerifyWebDomain"/> coroutine
+        /// starts processing.
+        /// </summary>
+        public event OnVerifyWebDomain OnBeforeVerifyWebDomain;
+        /// <summary>
+        /// Called around when the <see cref="VerifyWebDomain"/> coroutine
+        /// finishes.
+        /// </summary>
+        public event OnVerifyWebDomain OnAfterVerifyWebDomain;
+        /// <summary>
+        /// Called right before <see cref="CurrentState"/>
+        /// changes to a new value.
+        /// </summary>
+        public event OnStateChange OnBeforeStateChange;
+        /// <summary>
+        /// Called right after <see cref="CurrentState"/>
+        /// changes to a new value.
+        /// </summary>
+        public event OnStateChange OnAfterStateChange;
+
         /// <summary>
         /// Header string for the Unity Inspector.
         /// </summary>
@@ -188,33 +181,23 @@ namespace OmiyaGames.Web.Security
         ///</summary>
         [SerializeField]
         private string[] domainMustContain;
-
         ///<summary>
         /// [optional] The URL to fetch a list of domains
         ///</summary>
-        [Header(RemoteDomainListHeader)]
         [SerializeField]
-        [Tooltip("[optional] The URL to fetch a list of domains")]
-        private string remoteDomainListUrl;
+        private bool downloadRemoteDomainList = true;
+        [SerializeField]
+        private string remoteDomainListUrl = "TemplateData/domains";
         /// <summary>
         /// [optional] <see cref="StringCryptographer"/> to decrypt
         /// the downloaded <see cref="DomainList"/>.
         /// </summary>
         [SerializeField]
-        [Tooltip("[optional] The cryptographer that decrypts the encrypted strings in the list of domains")]
         private StringCryptographer domainDecrypter;
-        ///<summary>
-        /// [Optional] GameObjects to deactivate while the domain checking is happening
-        ///</summary>
-        [SerializeField]
-        [Tooltip("[Optional] GameObjects to deactivate while the domain checking is happening")]
-        private GameObject[] waitObjects;
-
         ///<summary>
         /// If true, the game will force the webplayer to redirect to
         /// the URL below
         ///</summary>
-        [Header("Redirect Options")]
         [SerializeField]
         private bool forceRedirectIfDomainDoesntMatch = true;
         ///<summary>
@@ -222,9 +205,10 @@ namespace OmiyaGames.Web.Security
         /// the strings in domainMustContain are found.
         ///</summary>
         [SerializeField]
-        private string redirectURL;
+        private string redirectURL = "https://";
 
         private string retrievedHostName = null;
+        private State currentState = State.NotUsed;
 
         #region Properties
         /// <summary>
@@ -233,9 +217,25 @@ namespace OmiyaGames.Web.Security
         /// </summary>
         public State CurrentState
         {
-            get;
-            private set;
-        } = State.NotUsed;
+            get => currentState;
+            private set
+            {
+                if (value != currentState)
+                {
+                    // Set event arguments
+                    StateChangeEventArgs args = new StateChangeEventArgs(currentState, value);
+
+                    // Call event
+                    OnBeforeStateChange?.Invoke(this, args);
+
+                    // Update state value
+                    currentState = value;
+
+                    // Call event
+                    OnAfterStateChange?.Invoke(this, args);
+                }
+            }
+        }
 
         /// <summary>
         /// Indicates if a <see cref="DomainList"/> was
@@ -316,28 +316,20 @@ namespace OmiyaGames.Web.Security
         /// <seealso cref="DownloadDomainsUrl"/>
         /// </summary>
         public string RemoteDomainListUrl => remoteDomainListUrl;
+
+        /// <summary>
+        /// True if downloading a domain list from a remote URL.
+        /// </summary>
+        public bool IsDownloadingARemoteDomainList => (downloadRemoteDomainList && (string.IsNullOrWhiteSpace(RemoteDomainListUrl) == false));
         #endregion
-
-        /// <inheritdoc/>
-        public override void SingletonAwake()
-        {
-            if (Singleton.Instance.IsWebApp == true)
-            {
-                // Shoot a coroutine if not in editor, and making Webplayer or WebGL
-                StartCoroutine(CheckDomainList());
-            }
-        }
-
-        /// <inheritdoc/>
-        public override void SceneAwake()
-        {
-            // Do nothing
-        }
 
         /// <summary>
         /// Makes the build redirect the browser to <see cref="redirectURL"/>.
         /// <seealso cref="RedirectTo(String)"/>
         /// </summary>
+        /// <exception cref="PlatformNotSupportedException">
+        /// Thrown when the runtime build isn't a <see cref="RuntimePlatform.WebGLPlayer"/>.
+        /// </exception>
         public void ForceRedirect()
         {
 #if UNITY_WEBGL
@@ -345,6 +337,8 @@ namespace OmiyaGames.Web.Security
             {
                 RedirectTo(redirectURL);
             }
+#else
+            throw new PlatformNotSupportedException("Redirect is only supported on WebGL builds");
 #endif
         }
 
@@ -358,26 +352,63 @@ namespace OmiyaGames.Web.Security
         /// </code>
         /// </summary>
         /// <returns>An enumerator for a coroutine.</returns>
-        public IEnumerator CheckDomainList()
+        /// <exception cref="PlatformNotSupportedException">
+        /// Thrown when the runtime build isn't a <see cref="RuntimePlatform.WebGLPlayer"/>.
+        /// </exception>
+        public IEnumerator VerifyWebDomain()
         {
+#if UNITY_WEBGL
             // Setup variables
             StringBuilder buf = new StringBuilder();
+            VerifyEventArgs args = new VerifyEventArgs();
+
+            // Run event
+            OnBeforeVerifyWebDomain?.Invoke(this, args);
+
+            // Update properties
             DownloadedDomainList = null;
             DownloadDomainsUrl = null;
             DownloadErrorMessage = null;
-
-            // Update state
             CurrentState = State.InProgress;
 
-            // Deactivate any objects
-            SetWaitObjectActive(false);
-
             // Grab a domain list remotely
-            if (string.IsNullOrEmpty(RemoteDomainListUrl) == false)
+            if (IsDownloadingARemoteDomainList == true)
             {
                 // Grab remote domain list
                 DownloadDomainsUrl = GenerateRemoteDomainList(buf);
-                yield return StartCoroutine(DownloadRemoteDomainList(buf, DownloadDomainsUrl));
+
+                // Start downloading the remote file (never cache this file)
+                using (UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(RemoteDomainListUrl))
+                {
+                    // Wait until the asset is fully received
+                    yield return www.SendWebRequest();
+
+                    // Check if there were any errors
+                    if ((www.isNetworkError == true) || (www.isHttpError == true))
+                    {
+                        DownloadErrorMessage = www.error;
+                    }
+                    else
+                    {
+                        // If asset bundle, convert it into a list
+                        try
+                        {
+                            AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(www);
+                            if (bundle != null)
+                            {
+                                DownloadedDomainList = ConvertToDomainList(DomainList.Get(bundle), domainDecrypter);
+                            }
+                            else
+                            {
+                                DownloadErrorMessage = "No domain list found";
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            DownloadErrorMessage = ex.Message;
+                        }
+                    }
+                }
             }
 
             // Setup hashset
@@ -386,14 +417,18 @@ namespace OmiyaGames.Web.Security
             // Make sure there's at least one domain we need to check
             CurrentState = GetNewState(AllUniqueDomains, out retrievedHostName);
 
-            // Reactivate any objects
-            SetWaitObjectActive(true);
+            // Run event
+            args.EndTime = Time.realtimeSinceStartup;
+            OnAfterVerifyWebDomain?.Invoke(this, args);
 
             // Check if we should force redirecting the player
             if ((forceRedirectIfDomainDoesntMatch == true) && (IsDomainInvalid(CurrentState) == true))
             {
                 ForceRedirect();
             }
+#else
+            throw new PlatformNotSupportedException("Verify web domain is only supported on WebGL builds");
+#endif
         }
 
         #region Helper Static Methods
@@ -504,45 +539,9 @@ namespace OmiyaGames.Web.Security
             }
             return returnState;
         }
-        #endregion
+#endregion
 
-        #region Helper Local Methods
-        IEnumerator DownloadRemoteDomainList(StringBuilder buf, string remoteDomainUrl)
-        {
-            // Start downloading the remote file (never cache this file)
-            using (UnityWebRequest www = UnityWebRequestAssetBundle.GetAssetBundle(RemoteDomainListUrl))
-            {
-                // Wait until the asset is fully received
-                yield return www.SendWebRequest();
-
-                // Check if there were any errors
-                if ((www.isNetworkError == true) || (www.isHttpError == true))
-                {
-                    DownloadErrorMessage = www.error;
-                }
-                else
-                {
-                    // If asset bundle, convert it into a list
-                    try
-                    {
-                        AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(www);
-                        if (bundle != null)
-                        {
-                            DownloadedDomainList = ConvertToDomainList(DomainList.Get(bundle), domainDecrypter);
-                        }
-                        else
-                        {
-                            DownloadErrorMessage = "No domain list found";
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        DownloadErrorMessage = ex.Message;
-                    }
-                }
-            }
-        }
-
+#region Helper Local Methods
         string GenerateRemoteDomainList(StringBuilder buf)
         {
             buf.Length = 0;
@@ -551,14 +550,6 @@ namespace OmiyaGames.Web.Security
             buf.Append(UnityEngine.Random.Range(0, int.MaxValue));
             return buf.ToString();
         }
-
-        void SetWaitObjectActive(bool state)
-        {
-            for (int index = 0; index < waitObjects.Length; ++index)
-            {
-                waitObjects[index].SetActive(state);
-            }
-        }
-        #endregion
+#endregion
     }
 }
