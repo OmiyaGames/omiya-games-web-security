@@ -16,8 +16,8 @@
   "dependencies": {
     "com.unity.ext.nunit": "1.0.0",
     "com.omiyagames.common": "0.2.0-preview.1",
-    "com.omiyagames.global": "0.1.0-preview.1",
-    "com.omiyagames.cryptography": "0.2.1-preview.1"
+    "com.omiyagames.global": "0.1.2-preview.1",
+    "com.omiyagames.cryptography": "0.3.0-preview.2"
   },
   "keywords": [
     "Omiya Games",
@@ -25,7 +25,10 @@
     "Template",
     "Tool",
     "Web",
-    "Security"
+    "Security",
+    "Project Settings",
+    "Asset",
+    "Scriptable Object"
   ],
   "samples": [
     {
