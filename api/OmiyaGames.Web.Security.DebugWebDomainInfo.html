@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enum WebLocationChecker.State
+    <title>Class DebugWebDomainInfo
    | Web Security documentation </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Enum WebLocationChecker.State
+    <meta name="title" content="Class DebugWebDomainInfo
    | Web Security documentation ">
     <meta name="generator" content="docfx 2.56.2.0">
     
@@ -78,64 +78,102 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="OmiyaGames.Web.Security.WebLocationChecker.State">
+            <article class="content wrap" id="_content" data-uid="OmiyaGames.Web.Security.DebugWebDomainInfo">
   
   
-  <h1 id="OmiyaGames_Web_Security_WebLocationChecker_State" data-uid="OmiyaGames.Web.Security.WebLocationChecker.State" class="text-break">Enum WebLocationChecker.State
+  <h1 id="OmiyaGames_Web_Security_DebugWebDomainInfo" data-uid="OmiyaGames.Web.Security.DebugWebDomainInfo" class="text-break">Class DebugWebDomainInfo
   </h1>
-  <div class="markdown level0 summary"><p>Indicates progression and result of this script.</p>
+  <div class="markdown level0 summary"><p>Helper debug methods for OmiyaGames.Web.Security namespace.
+<a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html">WebDomainVerifier</a></p>
 </div>
   <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">DebugWebDomainInfo</span></div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="OmiyaGames.Web.Security.html">OmiyaGames.Web.Security</a></h6>
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
-  <h5 id="OmiyaGames_Web_Security_WebLocationChecker_State_syntax">Syntax</h5>
+  <h5 id="OmiyaGames_Web_Security_DebugWebDomainInfo_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum State : short</code></pre>
+    <pre><code class="lang-csharp hljs">public static class DebugWebDomainInfo</code></pre>
   </div>
-  <h3 id="fields">Fields
+  <h5 id="OmiyaGames_Web_Security_DebugWebDomainInfo_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p><copyright file="DomainList.cs" company="Omiya Games">
+The MIT License (MIT)<p>
+<p>Copyright (c) 2016-2020 Omiya Games</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</copyright>
+<table><thead><tr><th>Revision</th><th>Description</th></tr></thead><tbody><tr><td>
+<strong>Version:</strong> 0.1.0-preview.1<br>
+<strong>Date:</strong> 5/20/2020<br>
+<strong>Author:</strong> Taro Omiya
+</td><td>Initial verison.</td></tr></tbody></table></p>
+</div>
+  <h3 id="methods">Methods
   </h3>
+  
+  
+  <a id="OmiyaGames_Web_Security_DebugWebDomainInfo_GetDebugMessage_" data-uid="OmiyaGames.Web.Security.DebugWebDomainInfo.GetDebugMessage*"></a>
+  <h4 id="OmiyaGames_Web_Security_DebugWebDomainInfo_GetDebugMessage_OmiyaGames_Web_Security_WebDomainVerifier_StringBuilder_" data-uid="OmiyaGames.Web.Security.DebugWebDomainInfo.GetDebugMessage(OmiyaGames.Web.Security.WebDomainVerifier,StringBuilder)">GetDebugMessage(WebDomainVerifier, StringBuilder)</h4>
+  <div class="markdown level1 summary"><p>Generates a debug message based on info about <code data-dev-comment-type="paramref" class="paramref">webChecker</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetDebugMessage(WebDomainVerifier webChecker, StringBuilder builder)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
+        <th>Type</th>
         <th>Name</th>
         <th>Description</th>
       </tr>
-    <thead>
+    </thead>
     <tbody>
       <tr>
-        <td id="OmiyaGames_Web_Security_WebLocationChecker_State_DomainDidntMatch">DomainDidntMatch</td>
-        <td><p>Indicates the domain this WebGL build is running on
-is <em>not</em> valid:
-it doesn&apos;t match any expected glob/string.</p>
-</td>
+        <td><a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html">WebDomainVerifier</a></td>
+        <td><span class="parametername">webChecker</span></td>
+        <td></td>
       </tr>
       <tr>
-        <td id="OmiyaGames_Web_Security_WebLocationChecker_State_DomainMatched">DomainMatched</td>
-        <td><p>Indicates the domain this WebGL build is running on
-is valid, matching an expected glob/string.</p>
-</td>
-      </tr>
-      <tr>
-        <td id="OmiyaGames_Web_Security_WebLocationChecker_State_EncounteredError">EncounteredError</td>
-        <td><p>Indicates there were trouble verifying the domain.
-Most likely, this is due to being unable to download
-a <see cref="!:DomainList"></see> for verification.</p>
-</td>
-      </tr>
-      <tr>
-        <td id="OmiyaGames_Web_Security_WebLocationChecker_State_InProgress">InProgress</td>
-        <td><p>Indicates the script is in the middle of evaluating
-the domain the WebGL build is running on. This process
-can include downloading a <see cref="!:DomainList"></see>.</p>
-</td>
-      </tr>
-      <tr>
-        <td id="OmiyaGames_Web_Security_WebLocationChecker_State_NotUsed">NotUsed</td>
-        <td><p>Indicates the script hasn&apos;t verified the domain yet.</p>
-</td>
+        <td><span class="xref">StringBuilder</span></td>
+        <td><span class="parametername">builder</span></td>
+        <td></td>
       </tr>
     </tbody>
-  </thead></thead></table>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           

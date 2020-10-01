@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace OmiyaGames.Web.Security
    | Web Security documentation ">
-    <meta name="generator" content="docfx 2.53.1.0">
+    <meta name="generator" content="docfx 2.56.2.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -87,9 +87,53 @@
   <div class="markdown level0 remarks"></div>
     <h3 id="classes">Classes
   </h3>
-      <h4><a class="xref" href="OmiyaGames.Web.Security.DebugWebLocation.html">DebugWebLocation</a></h4>
+      <h4><a class="xref" href="OmiyaGames.Web.Security.DebugWebDomainInfo.html">DebugWebDomainInfo</a></h4>
       <section><p>Helper debug methods for OmiyaGames.Web.Security namespace.
-<a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html">WebLocationChecker</a></p>
+<a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html">WebDomainVerifier</a></p>
+</section>
+      <h4><a class="xref" href="OmiyaGames.Web.Security.StateChangeEventArgs.html">StateChangeEventArgs</a></h4>
+      <section><p>Event arguments used to indicate how a state has changed. See
+<a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_OnBeforeStateChange">OnBeforeStateChange</a> and
+<a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_OnAfterStateChange">OnAfterStateChange</a>.</p>
+</section>
+      <h4><a class="xref" href="OmiyaGames.Web.Security.VerifyEventArgs.html">VerifyEventArgs</a></h4>
+      <section><p>Event arguments used to provide information on verify events. See
+<a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_OnBeforeVerifyWebDomain">OnBeforeVerifyWebDomain</a> and
+<a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_OnAfterVerifyWebDomain">OnAfterVerifyWebDomain</a>.</p>
+</section>
+      <h4><a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html">WebDomainVerifier</a></h4>
+      <section><p>
+Original code by andyman from Github:<br>
+<a href="https://gist.github.com/andyman/e58dea85cce23cccecff">https://gist.github.com/andyman/e58dea85cce23cccecff</a>
+</p><p>
+Extra modifications by jcx from Github:<br>
+<a href="https://gist.github.com/jcx/93a3fc93531911add8a8">https://gist.github.com/jcx/93a3fc93531911add8a8</a>
+</p><p>
+For WebGL builds, this script grabs the domain of the website this
+game is running on, and verifies it against two lists:
+<ol><li>
+The list of strings in <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_DefaultDomainList">DefaultDomainList</a>.
+</li><li>
+Optionally, if <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_RemoteDomainListUrl">RemoteDomainListUrl</a> isn&apos;t an empty string
+(or null), this script will attempt to download from the specified url,
+and read it as a <see cref="!:DomainList"></see>. If successful, the globs
+listed in the <see cref="!:DomainList"></see> will be used to match the domain
+as well. Remember that if the <see cref="!:DomainList"></see> is encrypted,
+the <span class="xref">OmiyaGames.Web.Security.WebDomainVerifier.domainDecrypter</span> needs to be set in the Unity inspector
+to help decrypt the content of the list.
+</li></ol>
+Don&apos;t forget to run the <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_VerifyWebDomain">VerifyWebDomain()</a> coroutine! When
+it finished, the <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_CurrentState">CurrentState</a> will be set, indicating
+whether a match was found or not. Here&apos;s an example:
+<pre><code>[SerializeField]
+private WebDomainVerifier domainVerifier;
+
+IEnumerator Start()
+{
+    yield return StartCoroutine(domainVerifier.VerifyWebDomain());
+    Debug.Log(domainVerifier.CurrentState);
+}</code></pre>
+</p>
 </section>
       <h4><a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html">WebLocationChecker</a></h4>
       <section><p>
@@ -102,28 +146,45 @@ Extra modifications by jcx from Github:<br>
 Add this script to an object in the first scene of your game.
 For WebGL builds, this script grabs the domain the game is running on,
 and verifies it against two lists:
-</p><p>
-1) The list of strings in <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_DefaultDomainList">DefaultDomainList</a>, or
-</p><p>
-2) If a <see cref="!:DomainList"></see> was successfully downloaded from
-<a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_RemoteDomainListUrl">RemoteDomainListUrl</a>, matches the domain to any of the
-globs listed in the <see cref="!:DomainList"></see>. Remember that if the
-<see cref="!:DomainList"></see> is encrypted, to set the
-<span class="xref">OmiyaGames.Web.Security.WebLocationChecker.domainDecrypter</span> in the Unity inspector.
-</p><p>
+<ol><li>
+The list of strings in <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_DefaultDomainList">DefaultDomainList</a>.
+</li><li>
+Optionally, if <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_RemoteDomainListUrl">RemoteDomainListUrl</a> isn&apos;t an empty string
+(or null), this script will attempt to download from the specified url,
+and read it as a <see cref="!:DomainList"></see>. If successful, the globs
+listed in the <see cref="!:DomainList"></see> will be used to match the domain
+as well. Remember that if the <see cref="!:DomainList"></see> is encrypted,
+the <span class="xref">OmiyaGames.Web.Security.WebLocationChecker.domainDecrypter</span> needs to be set in the Unity inspector
+to help decrypt the content of the list.
+</li></ol>
+Don&apos;t forget to run the <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_CheckDomainList">CheckDomainList()</a> coroutine! When
+it finished, the <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_CurrentState">CurrentState</a> will be set, indicating
+whether a match was found or not. Here&apos;s an example:
+<pre><code>IEnumerator Start()
+{
+    WebLocationChecker checker = GetComponent&lt;WebLocationChecker>();
+    yield return StartCoroutine(checker.CheckDomainList());
+    Debug.Log(checker.CurrentState);
+}</code></pre>
 If the script is attached to a <see cref="!:GameObject"></see> with
 <see cref="!:Singleton"></see> already attached, the above example code
 will run automatically on <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_SceneAwake">SceneAwake()</a>.
 </p>
 </section>
-      <h4><a class="xref" href="OmiyaGames.Web.Security.WebLocationInfo.html">WebLocationInfo</a></h4>
-      <section><p>Provides debugging information for the WebGL build, and its host information.</p>
-</section>
     <h3 id="enums">Enums
   </h3>
+      <h4><a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.State.html">WebDomainVerifier.State</a></h4>
+      <section><p>Indicates progression and result of this script.</p>
+</section>
       <h4><a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.State.html">WebLocationChecker.State</a></h4>
       <section><p>Indicates progression and result of this script.</p>
 </section>
+    <h3 id="delegates">Delegates
+  </h3>
+      <h4><a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.OnStateChange.html">WebDomainVerifier.OnStateChange</a></h4>
+      <section></section>
+      <h4><a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.OnVerifyWebDomain.html">WebDomainVerifier.OnVerifyWebDomain</a></h4>
+      <section></section>
 </article>
           </div>
           

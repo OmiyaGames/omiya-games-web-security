@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class WebLocationChecker
+    <title>Class WebDomainVerifier
    | Web Security documentation </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class WebLocationChecker
+    <meta name="title" content="Class WebDomainVerifier
    | Web Security documentation ">
     <meta name="generator" content="docfx 2.56.2.0">
     
@@ -78,10 +78,10 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="OmiyaGames.Web.Security.WebLocationChecker">
+            <article class="content wrap" id="_content" data-uid="OmiyaGames.Web.Security.WebDomainVerifier">
   
   
-  <h1 id="OmiyaGames_Web_Security_WebLocationChecker" data-uid="OmiyaGames.Web.Security.WebLocationChecker" class="text-break">Class WebLocationChecker
+  <h1 id="OmiyaGames_Web_Security_WebDomainVerifier" data-uid="OmiyaGames.Web.Security.WebDomainVerifier" class="text-break">Class WebDomainVerifier
   </h1>
   <div class="markdown level0 summary"><p>
 Original code by andyman from Github:<br>
@@ -90,50 +90,48 @@ Original code by andyman from Github:<br>
 Extra modifications by jcx from Github:<br>
 <a href="https://gist.github.com/jcx/93a3fc93531911add8a8">https://gist.github.com/jcx/93a3fc93531911add8a8</a>
 </p><p>
-Add this script to an object in the first scene of your game.
-For WebGL builds, this script grabs the domain the game is running on,
-and verifies it against two lists:
+For WebGL builds, this script grabs the domain of the website this
+game is running on, and verifies it against two lists:
 <ol><li>
-The list of strings in <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_DefaultDomainList">DefaultDomainList</a>.
+The list of strings in <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_DefaultDomainList">DefaultDomainList</a>.
 </li><li>
-Optionally, if <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_RemoteDomainListUrl">RemoteDomainListUrl</a> isn&apos;t an empty string
+Optionally, if <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_RemoteDomainListUrl">RemoteDomainListUrl</a> isn&apos;t an empty string
 (or null), this script will attempt to download from the specified url,
 and read it as a <see cref="!:DomainList"></see>. If successful, the globs
 listed in the <see cref="!:DomainList"></see> will be used to match the domain
 as well. Remember that if the <see cref="!:DomainList"></see> is encrypted,
-the <span class="xref">OmiyaGames.Web.Security.WebLocationChecker.domainDecrypter</span> needs to be set in the Unity inspector
+the <span class="xref">OmiyaGames.Web.Security.WebDomainVerifier.domainDecrypter</span> needs to be set in the Unity inspector
 to help decrypt the content of the list.
 </li></ol>
-Don&apos;t forget to run the <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_CheckDomainList">CheckDomainList()</a> coroutine! When
-it finished, the <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_CurrentState">CurrentState</a> will be set, indicating
+Don&apos;t forget to run the <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_VerifyWebDomain">VerifyWebDomain()</a> coroutine! When
+it finished, the <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_CurrentState">CurrentState</a> will be set, indicating
 whether a match was found or not. Here&apos;s an example:
-<pre><code>IEnumerator Start()
+<pre><code>[SerializeField]
+private WebDomainVerifier domainVerifier;
+
+IEnumerator Start()
 {
-    WebLocationChecker checker = GetComponent&lt;WebLocationChecker>();
-    yield return StartCoroutine(checker.CheckDomainList());
-    Debug.Log(checker.CurrentState);
+    yield return StartCoroutine(domainVerifier.VerifyWebDomain());
+    Debug.Log(domainVerifier.CurrentState);
 }</code></pre>
-If the script is attached to a <see cref="!:GameObject"></see> with
-<see cref="!:Singleton"></see> already attached, the above example code
-will run automatically on <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_SceneAwake">SceneAwake()</a>.
 </p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">WebLocationChecker</span></div>
+    <div class="level1"><span class="xref">WebDomainVerifier</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="OmiyaGames.Web.Security.html">OmiyaGames.Web.Security</a></h6>
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
-  <h5 id="OmiyaGames_Web_Security_WebLocationChecker_syntax">Syntax</h5>
+  <h5 id="OmiyaGames_Web_Security_WebDomainVerifier_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class WebLocationChecker : ISingletonScript</code></pre>
+    <pre><code class="lang-csharp hljs">public class WebDomainVerifier : ScriptableObject</code></pre>
   </div>
-  <h5 id="OmiyaGames_Web_Security_WebLocationChecker_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p><copyright file="WebLocationChecker.cs" company="Omiya Games">
+  <h5 id="OmiyaGames_Web_Security_WebDomainVerifier_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p><copyright file="WebDomainVerifier.cs" company="Omiya Games">
 The MIT License (MIT)<p>
-<p>Copyright (c) 2014-2020 Omiya Games</p>
+<p>Copyright (c) 2020-2020 Omiya Games</p>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the &quot;Software&quot;), to deal
 in the Software without restriction, including without limitation the rights
@@ -151,35 +149,41 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 </copyright>
 <table><thead><tr><th>Revision</th><th>Description</th></tr></thead><tbody><tr><td>
-<strong>Date:</strong> 5/15/2016<br>
+<strong>Version:</strong> 0.2.0-preview.1<br>
+<strong>Date:</strong> 6/29/2020<br>
 <strong>Author:</strong> Taro Omiya
-</td><td>Initial verison.</td></tr><tr><td>
-<strong>Date:</strong> 6/5/2018<br>
-<strong>Author:</strong> Taro Omiya
-</td><td>Removed plain-text support.</td></tr><tr><td>
-<strong>Date:</strong> 2/12/2019<br>
-<strong>Author:</strong> Taro Omiya
-</td><td>
-Adding encryption support of the binary <see cref="!:DomainList"></see>.
-</td></tr><tr><td>
-<strong>Version:</strong> 0.1.0-preview.1<br>
-<strong>Date:</strong> 5/20/2020<br>
-<strong>Author:</strong> Taro Omiya
-</td><td>
-Converting to package. Improving documentation for DocFX support.
-</td></tr><tr><td>
-<strong>Version:</strong> 0.1.1-preview.1<br>
-<strong>Date:</strong> 5/22/2020<br>
-<strong>Author:</strong> Taro Omiya
-</td><td>
-Fixing documentation to actually be XML-compliant
-</td></tr></tbody></table></p>
+</td><td>Initial verison.</td></tr></tbody></table></p>
 </div>
   <h3 id="fields">Fields
   </h3>
   
   
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_RemoteDomainListHeader" data-uid="OmiyaGames.Web.Security.WebLocationChecker.RemoteDomainListHeader">RemoteDomainListHeader</h4>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_ProjectSettingsPath" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.ProjectSettingsPath">ProjectSettingsPath</h4>
+  <div class="markdown level1 summary"><p>Path where this asset will be created.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const string ProjectSettingsPath = &quot;Project/Omiya Games/Web Security&quot;</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_RemoteDomainListHeader" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.RemoteDomainListHeader">RemoteDomainListHeader</h4>
   <div class="markdown level1 summary"><p>Header string for the Unity Inspector.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -206,8 +210,8 @@ Fixing documentation to actually be XML-compliant
   </h3>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_AllUniqueDomains_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.AllUniqueDomains*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_AllUniqueDomains" data-uid="OmiyaGames.Web.Security.WebLocationChecker.AllUniqueDomains">AllUniqueDomains</h4>
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_AllUniqueDomains_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.AllUniqueDomains*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_AllUniqueDomains" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.AllUniqueDomains">AllUniqueDomains</h4>
   <div class="markdown level1 summary"><p>The <see cref="!:Dictionary&lt;TKey, TValue>"></see> of all unique domains.
 Keys are the globs, and values are the regular expression equivalent.
 <seealso cref="!:DomainList.ConvertToRegex(string, StringBuilder)"></seealso></p>
@@ -234,15 +238,15 @@ Keys are the globs, and values are the regular expression equivalent.
   </table>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_CurrentState_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.CurrentState*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_CurrentState" data-uid="OmiyaGames.Web.Security.WebLocationChecker.CurrentState">CurrentState</h4>
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_CurrentState_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.CurrentState*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_CurrentState" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.CurrentState">CurrentState</h4>
   <div class="markdown level1 summary"><p>Indicates the state this script is in.
-<a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.State.html">WebLocationChecker.State</a></p>
+<a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.State.html">WebDomainVerifier.State</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WebLocationChecker.State CurrentState { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public WebDomainVerifier.State CurrentState { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -254,18 +258,18 @@ Keys are the globs, and values are the regular expression equivalent.
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.State.html">WebLocationChecker.State</a></td>
+        <td><a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.State.html">WebDomainVerifier.State</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_DefaultDomainList_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.DefaultDomainList*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_DefaultDomainList" data-uid="OmiyaGames.Web.Security.WebLocationChecker.DefaultDomainList">DefaultDomainList</h4>
-  <div class="markdown level1 summary"><p>The default list of domains to match <a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_RetrievedHostName">RetrievedHostName</a> against.
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_DefaultDomainList_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.DefaultDomainList*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_DefaultDomainList" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.DefaultDomainList">DefaultDomainList</h4>
+  <div class="markdown level1 summary"><p>The default list of domains to match <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_RetrievedHostName">RetrievedHostName</a> against.
 This list excludes the globs stored in a <see cref="!:DomainList"></see>.
-<a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_RemoteDomainListUrl">RemoteDomainListUrl</a></p>
+<a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_RemoteDomainListUrl">RemoteDomainListUrl</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -289,8 +293,8 @@ This list excludes the globs stored in a <see cref="!:DomainList"></see>.
   </table>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_DownloadDomainsUrl_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.DownloadDomainsUrl*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_DownloadDomainsUrl" data-uid="OmiyaGames.Web.Security.WebLocationChecker.DownloadDomainsUrl">DownloadDomainsUrl</h4>
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_DownloadDomainsUrl_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.DownloadDomainsUrl*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_DownloadDomainsUrl" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.DownloadDomainsUrl">DownloadDomainsUrl</h4>
   <div class="markdown level1 summary"><p>The URL used to download a <see cref="!:DomainList"></see>. Slightly randomized
 to prevent predictablity.</p>
 </div>
@@ -316,8 +320,8 @@ to prevent predictablity.</p>
   </table>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_DownloadedDomainList_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.DownloadedDomainList*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_DownloadedDomainList" data-uid="OmiyaGames.Web.Security.WebLocationChecker.DownloadedDomainList">DownloadedDomainList</h4>
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_DownloadedDomainList_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.DownloadedDomainList*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_DownloadedDomainList" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.DownloadedDomainList">DownloadedDomainList</h4>
   <div class="markdown level1 summary"><p>The list of globs in a <see cref="!:DomainList"></see>, if successfully downloaded.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -342,8 +346,8 @@ to prevent predictablity.</p>
   </table>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_DownloadErrorMessage_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.DownloadErrorMessage*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_DownloadErrorMessage" data-uid="OmiyaGames.Web.Security.WebLocationChecker.DownloadErrorMessage">DownloadErrorMessage</h4>
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_DownloadErrorMessage_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.DownloadErrorMessage*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_DownloadErrorMessage" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.DownloadErrorMessage">DownloadErrorMessage</h4>
   <div class="markdown level1 summary"><p>Indicates the error when attempting to download a <see cref="!:DomainList"></see>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -368,8 +372,8 @@ to prevent predictablity.</p>
   </table>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_IsDomainListSuccessfullyDownloaded_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.IsDomainListSuccessfullyDownloaded*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_IsDomainListSuccessfullyDownloaded" data-uid="OmiyaGames.Web.Security.WebLocationChecker.IsDomainListSuccessfullyDownloaded">IsDomainListSuccessfullyDownloaded</h4>
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_IsDomainListSuccessfullyDownloaded_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.IsDomainListSuccessfullyDownloaded*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_IsDomainListSuccessfullyDownloaded" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.IsDomainListSuccessfullyDownloaded">IsDomainListSuccessfullyDownloaded</h4>
   <div class="markdown level1 summary"><p>Indicates if a <see cref="!:DomainList"></see> was
 downloaded or not.</p>
 </div>
@@ -395,10 +399,36 @@ downloaded or not.</p>
   </table>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_RemoteDomainListUrl_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.RemoteDomainListUrl*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_RemoteDomainListUrl" data-uid="OmiyaGames.Web.Security.WebLocationChecker.RemoteDomainListUrl">RemoteDomainListUrl</h4>
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_IsDownloadingARemoteDomainList_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.IsDownloadingARemoteDomainList*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_IsDownloadingARemoteDomainList" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.IsDownloadingARemoteDomainList">IsDownloadingARemoteDomainList</h4>
+  <div class="markdown level1 summary"><p>True if downloading a domain list from a remote URL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsDownloadingARemoteDomainList { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_RemoteDomainListUrl_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.RemoteDomainListUrl*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_RemoteDomainListUrl" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.RemoteDomainListUrl">RemoteDomainListUrl</h4>
   <div class="markdown level1 summary"><p>The original URL to download a <see cref="!:DomainList"></see> from.
-<a class="xref" href="OmiyaGames.Web.Security.WebLocationChecker.html#OmiyaGames_Web_Security_WebLocationChecker_DownloadDomainsUrl">DownloadDomainsUrl</a></p>
+<a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_DownloadDomainsUrl">DownloadDomainsUrl</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -422,8 +452,8 @@ downloaded or not.</p>
   </table>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_RetrievedHostName_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.RetrievedHostName*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_RetrievedHostName" data-uid="OmiyaGames.Web.Security.WebLocationChecker.RetrievedHostName">RetrievedHostName</h4>
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_RetrievedHostName_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.RetrievedHostName*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_RetrievedHostName" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.RetrievedHostName">RetrievedHostName</h4>
   <div class="markdown level1 summary"><p>The domain this WebGL build is running on.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -450,13 +480,25 @@ downloaded or not.</p>
   </h3>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_CheckDomainList_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.CheckDomainList*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_CheckDomainList" data-uid="OmiyaGames.Web.Security.WebLocationChecker.CheckDomainList">CheckDomainList()</h4>
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_ForceRedirect_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.ForceRedirect*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_ForceRedirect" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.ForceRedirect">ForceRedirect()</h4>
+  <div class="markdown level1 summary"><p>Makes the build redirect the browser to <span class="xref">OmiyaGames.Web.Security.WebDomainVerifier.redirectURL</span>.
+<seealso cref="!:RedirectTo(String)"></seealso></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ForceRedirect()</code></pre>
+  </div>
+  
+  
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_VerifyWebDomain_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.VerifyWebDomain*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_VerifyWebDomain" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.VerifyWebDomain">VerifyWebDomain()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IEnumerator CheckDomainList()</code></pre>
+    <pre><code class="lang-csharp hljs">public IEnumerator VerifyWebDomain()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -473,38 +515,112 @@ downloaded or not.</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="events">Events
+  </h3>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_ForceRedirect_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.ForceRedirect*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_ForceRedirect" data-uid="OmiyaGames.Web.Security.WebLocationChecker.ForceRedirect">ForceRedirect()</h4>
-  <div class="markdown level1 summary"><p>Makes the build redirect the browser to <span class="xref">OmiyaGames.Web.Security.WebLocationChecker.redirectURL</span>.
-<seealso cref="!:RedirectTo(String)"></seealso></p>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_OnAfterStateChange" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.OnAfterStateChange">OnAfterStateChange</h4>
+  <div class="markdown level1 summary"><p>Called right after <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_CurrentState">CurrentState</a>
+changes to a new value.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ForceRedirect()</code></pre>
+    <pre><code class="lang-csharp hljs">public event WebDomainVerifier.OnStateChange OnAfterStateChange</code></pre>
   </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.OnStateChange.html">WebDomainVerifier.OnStateChange</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_SceneAwake_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.SceneAwake*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_SceneAwake" data-uid="OmiyaGames.Web.Security.WebLocationChecker.SceneAwake">SceneAwake()</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_OnAfterVerifyWebDomain" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.OnAfterVerifyWebDomain">OnAfterVerifyWebDomain</h4>
+  <div class="markdown level1 summary"><p>Called around when the <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_VerifyWebDomain">VerifyWebDomain()</a> coroutine
+finishes.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void SceneAwake()</code></pre>
+    <pre><code class="lang-csharp hljs">public event WebDomainVerifier.OnVerifyWebDomain OnAfterVerifyWebDomain</code></pre>
   </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.OnVerifyWebDomain.html">WebDomainVerifier.OnVerifyWebDomain</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   
   
-  <a id="OmiyaGames_Web_Security_WebLocationChecker_SingletonAwake_" data-uid="OmiyaGames.Web.Security.WebLocationChecker.SingletonAwake*"></a>
-  <h4 id="OmiyaGames_Web_Security_WebLocationChecker_SingletonAwake" data-uid="OmiyaGames.Web.Security.WebLocationChecker.SingletonAwake">SingletonAwake()</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_OnBeforeStateChange" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.OnBeforeStateChange">OnBeforeStateChange</h4>
+  <div class="markdown level1 summary"><p>Called right before <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_CurrentState">CurrentState</a>
+changes to a new value.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void SingletonAwake()</code></pre>
+    <pre><code class="lang-csharp hljs">public event WebDomainVerifier.OnStateChange OnBeforeStateChange</code></pre>
   </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.OnStateChange.html">WebDomainVerifier.OnStateChange</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_OnBeforeVerifyWebDomain" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.OnBeforeVerifyWebDomain">OnBeforeVerifyWebDomain</h4>
+  <div class="markdown level1 summary"><p>Called just as the <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_VerifyWebDomain">VerifyWebDomain()</a> coroutine
+starts processing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event WebDomainVerifier.OnVerifyWebDomain OnBeforeVerifyWebDomain</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.OnVerifyWebDomain.html">WebDomainVerifier.OnVerifyWebDomain</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           
