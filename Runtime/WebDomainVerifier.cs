@@ -321,6 +321,11 @@ namespace OmiyaGames.Web.Security
         /// True if downloading a domain list from a remote URL.
         /// </summary>
         public bool IsDownloadingARemoteDomainList => (downloadRemoteDomainList && (string.IsNullOrWhiteSpace(RemoteDomainListUrl) == false));
+
+        /// <summary>
+        /// Gets the cryptographer that decrypts the domain list downloaded from <see cref="RemoteDomainListUrl"/>.
+        /// </summary>
+        public StringCryptographer DomainDecrypter => domainDecrypter;
         #endregion
 
         /// <summary>
@@ -396,7 +401,7 @@ namespace OmiyaGames.Web.Security
                             AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(www);
                             if (bundle != null)
                             {
-                                DownloadedDomainList = ConvertToDomainList(DomainList.Get(bundle), domainDecrypter);
+                                DownloadedDomainList = ConvertToDomainList(DomainList.Get(bundle), DomainDecrypter);
                             }
                             else
                             {
