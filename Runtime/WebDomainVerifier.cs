@@ -49,6 +49,13 @@ namespace OmiyaGames.Web.Security
     /// <strong>Author:</strong> Taro Omiya
     /// </term>
     /// <description>Initial verison.</description>
+    /// </item><item>
+    /// <term>
+    /// <strong>Version:</strong> 0.2.0-preview.2<br/>
+    /// <strong>Date:</strong> 10/1/2020<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>Exposing <see cref="DomainDecrypter"/>.</description>
     /// </item>
     /// </list>
     /// </remarks>
