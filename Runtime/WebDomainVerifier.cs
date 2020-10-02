@@ -49,6 +49,13 @@ namespace OmiyaGames.Web.Security
     /// <strong>Author:</strong> Taro Omiya
     /// </term>
     /// <description>Initial verison.</description>
+    /// </item><item>
+    /// <term>
+    /// <strong>Version:</strong> 0.2.0-preview.2<br/>
+    /// <strong>Date:</strong> 10/1/2020<br/>
+    /// <strong>Author:</strong> Taro Omiya
+    /// </term>
+    /// <description>Exposing <see cref="DomainDecrypter"/>.</description>
     /// </item>
     /// </list>
     /// </remarks>
@@ -321,6 +328,11 @@ namespace OmiyaGames.Web.Security
         /// True if downloading a domain list from a remote URL.
         /// </summary>
         public bool IsDownloadingARemoteDomainList => (downloadRemoteDomainList && (string.IsNullOrWhiteSpace(RemoteDomainListUrl) == false));
+
+        /// <summary>
+        /// Gets the cryptographer that decrypts the domain list downloaded from <see cref="RemoteDomainListUrl"/>.
+        /// </summary>
+        public StringCryptographer DomainDecrypter => domainDecrypter;
         #endregion
 
         /// <summary>
@@ -396,7 +408,7 @@ namespace OmiyaGames.Web.Security
                             AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(www);
                             if (bundle != null)
                             {
-                                DownloadedDomainList = ConvertToDomainList(DomainList.Get(bundle), domainDecrypter);
+                                DownloadedDomainList = ConvertToDomainList(DomainList.Get(bundle), DomainDecrypter);
                             }
                             else
                             {
