@@ -152,7 +152,11 @@ THE SOFTWARE.
 <strong>Version:</strong> 0.2.0-preview.1<br>
 <strong>Date:</strong> 6/29/2020<br>
 <strong>Author:</strong> Taro Omiya
-</td><td>Initial verison.</td></tr></tbody></table></p>
+</td><td>Initial verison.</td></tr><tr><td>
+<strong>Version:</strong> 0.2.0-preview.2<br>
+<strong>Date:</strong> 10/1/2020<br>
+<strong>Author:</strong> Taro Omiya
+</td><td>Exposing <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_DomainDecrypter">DomainDecrypter</a>.</td></tr></tbody></table></p>
 </div>
   <h3 id="fields">Fields
   </h3>
@@ -287,6 +291,32 @@ This list excludes the globs stored in a <see cref="!:DomainList"></see>.
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="OmiyaGames_Web_Security_WebDomainVerifier_DomainDecrypter_" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.DomainDecrypter*"></a>
+  <h4 id="OmiyaGames_Web_Security_WebDomainVerifier_DomainDecrypter" data-uid="OmiyaGames.Web.Security.WebDomainVerifier.DomainDecrypter">DomainDecrypter</h4>
+  <div class="markdown level1 summary"><p>Gets the cryptographer that decrypts the domain list downloaded from <a class="xref" href="OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_RemoteDomainListUrl">RemoteDomainListUrl</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StringCryptographer DomainDecrypter { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">StringCryptographer</span></td>
         <td></td>
       </tr>
     </tbody>

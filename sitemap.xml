@@ -2,103 +2,103 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.DebugWebDomainInfo.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.Editor.WebDomainVerifierSettingsProvider.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.Editor.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.StateChangeEventArgs.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.VerifyEventArgs.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.WebDomainVerifier.OnStateChange.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.WebDomainVerifier.OnVerifyWebDomain.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.WebDomainVerifier.State.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.WebDomainVerifier.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.WebLocationChecker.State.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.WebLocationChecker.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/api/OmiyaGames.Web.Security.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/index.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/manual/changelog.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://omiyagames.github.io/omiya-games-web-security/manual/README.html</loc>
-    <lastmod>2020-10-01T02:10:54+00:00</lastmod>
+    <lastmod>2020-10-02T01:12:20+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

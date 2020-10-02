@@ -331,6 +331,19 @@ references:
   isSpec: "True"
   fullName: OmiyaGames.Web.Security.WebDomainVerifier.DefaultDomainList
   nameWithType: WebDomainVerifier.DefaultDomainList
+- uid: OmiyaGames.Web.Security.WebDomainVerifier.DomainDecrypter
+  name: DomainDecrypter
+  href: api/OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_DomainDecrypter
+  commentId: P:OmiyaGames.Web.Security.WebDomainVerifier.DomainDecrypter
+  fullName: OmiyaGames.Web.Security.WebDomainVerifier.DomainDecrypter
+  nameWithType: WebDomainVerifier.DomainDecrypter
+- uid: OmiyaGames.Web.Security.WebDomainVerifier.DomainDecrypter*
+  name: DomainDecrypter
+  href: api/OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_DomainDecrypter_
+  commentId: Overload:OmiyaGames.Web.Security.WebDomainVerifier.DomainDecrypter
+  isSpec: "True"
+  fullName: OmiyaGames.Web.Security.WebDomainVerifier.DomainDecrypter
+  nameWithType: WebDomainVerifier.DomainDecrypter
 - uid: OmiyaGames.Web.Security.WebDomainVerifier.DownloadDomainsUrl
   name: DownloadDomainsUrl
   href: api/OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_DownloadDomainsUrl
