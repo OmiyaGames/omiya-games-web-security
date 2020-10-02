@@ -1,9 +1,9 @@
 {
   "name": "com.omiyagames.web.security",
   "displayName": "Omiya Games - Web Security",
-  "version": "0.2.0-preview.1",
+  "version": "0.2.0-preview.2",
   "unity": "2020.1",
-  "unityRelease": "6f1",
+  "unityRelease": "7f1",
   "description": "Collection of tools for web security.",
   "category": "Tool",
   "type": "tool",

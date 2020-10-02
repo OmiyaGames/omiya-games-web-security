@@ -1,5 +1,9 @@
 # Change Log:
 
+## 0.2.0-preview.2
+
+- Enhancement: exposing [`WebDomainVerifier.DomainDecrypter`](https://github.com/OmiyaGames/omiya-games-web-security/blob/master/Runtime/WebDomainVerifier.cs).
+
 ## 0.2.0-preview.1
 
 - New Feature #1: Created [`WebDomainVerifier`](https://github.com/OmiyaGames/omiya-games-web-security/blob/master/Runtime/WebDomainVerifier.cs), an asset that is auto-created in the project, and will appear on the Project Settings window.
