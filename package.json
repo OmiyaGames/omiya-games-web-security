@@ -2,8 +2,8 @@
   "name": "com.omiyagames.web.security",
   "displayName": "Omiya Games - Web Security",
   "version": "0.2.0-preview.2",
-  "unity": "2020.1",
-  "unityRelease": "7f1",
+  "unity": "2021.1",
+  "unityRelease": "9f1",
   "description": "Collection of tools for web security.",
   "category": "Tool",
   "type": "tool",
@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "com.unity.ext.nunit": "1.0.0",
-    "com.omiyagames.common": "0.2.0-preview.1",
-    "com.omiyagames.global": "0.1.2-preview.1",
-    "com.omiyagames.cryptography": "0.3.0-preview.2"
+    "com.omiyagames.common": "0.2.0-preview.2",
+    "com.omiyagames.global": "0.1.2-preview.2",
+    "com.omiyagames.cryptography": "0.3.0-preview.3"
   },
   "keywords": [
     "Omiya Games",
@@ -35,7 +35,8 @@
       "displayName": "WebDomainVerifier Sample",
       "description": "Provides an example of how to use the WebDomainVerifier to defend your WebGL game.",
       "path": "Samples~/WebDomainVerifier/Sample"
-    }, {
+    },
+    {
       "displayName": "WebDomainVerifier Debug Info",
       "description": "Provides a scene that prints a large amount of info from WebDomainVerifier. Great for debugging!",
       "path": "Samples~/WebDomainVerifier/Debug Info"
