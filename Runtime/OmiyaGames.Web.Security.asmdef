@@ -1,8 +1,9 @@
 {
     "name": "OmiyaGames.Web.Security",
+    "rootNamespace": "OmiyaGames.Web.Security",
     "references": [
-        "OmiyaGames.Global",
-        "OmiyaGames.Cryptography"
+        "GUID:5a47daee1058bbd4ebc7a2d2e7de3c24",
+        "GUID:7f4dbb4916058a7438cc6b2e9fee8d60"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
