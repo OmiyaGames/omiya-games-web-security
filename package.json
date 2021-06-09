@@ -1,9 +1,9 @@
 {
   "name": "com.omiyagames.web.security",
   "displayName": "Omiya Games - Web Security",
-  "version": "0.2.0-preview.3",
+  "version": "1.0.0-pre",
   "unity": "2021.1",
-  "unityRelease": "9f1",
+  "unityRelease": "10f1",
   "description": "Collection of tools for web security.",
   "category": "Tool",
   "type": "tool",
@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "com.unity.ext.nunit": "1.0.0",
-    "com.omiyagames.common": "0.2.0-preview.2",
-    "com.omiyagames.global": "0.1.2-preview.2",
-    "com.omiyagames.cryptography": "0.3.0-preview.3"
+    "com.omiyagames.common": "1.0.0",
+    "com.omiyagames.global": "1.0.0",
+    "com.omiyagames.cryptography": "1.0.0"
   },
   "keywords": [
     "Omiya Games",
