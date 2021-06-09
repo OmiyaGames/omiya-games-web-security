@@ -72,4 +72,4 @@ openupm add com.omiyagames.web.security
 
 Overall package is licensed under [MIT](https://github.com/OmiyaGames/omiya-games-web-security/blob/master/LICENSE.md), unless otherwise noted in the [3rd party licenses](https://github.com/OmiyaGames/omiya-games-web-security/blob/master/THIRD%20PARTY%20NOTICES.md) file and/or source code.
 
-Copyright (c) 2019-2020 Omiya Games
+Copyright (c) 2019-2021 Omiya Games
