@@ -1,6 +1,6 @@
 # [Omiya Games](https://www.omiyagames.com/) - Web Security
 
-[![openupm](https://img.shields.io/npm/v/com.omiyagames.web.security?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.omiyagames.web.security/) [![Documentation](https://github.com/OmiyaGames/omiya-games-web-security/workflows/Host%20DocFX%20Documentation/badge.svg)](https://omiyagames.github.io/omiya-games-web-security/) [![Mirroring](https://github.com/OmiyaGames/omiya-games-web-security/workflows/Mirroring/badge.svg)](https://bitbucket.org/OmiyaGames/omiya-games-web-security) [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I3I51KS8F)
+[![openupm](https://img.shields.io/npm/v/com.omiyagames.web.security?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.omiyagames.web.security/) [![Documentation](https://github.com/OmiyaGames/omiya-games-web-security/workflows/Host%20DocFX%20Documentation/badge.svg)](https://omiyagames.github.io/omiya-games-web-security/) [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I3I51KS8F)
 
 **Web Security** is a Github package [Omiya Games](https://www.omiyagames.com/) uses to peform various security features for WebGL builds.  This includes:
 
