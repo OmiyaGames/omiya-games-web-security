@@ -25,8 +25,9 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <OmiyaGames.Common.Editor.Spacer />
-            <ui:Label text="Take Advantage of this web security feature by adding in the following code:" display-tooltip-when-elided="true" name="CodeHint" class="indent" style="flex-wrap: wrap; white-space: normal;" />
-            <ui:TextField picking-mode="Ignore" value="filler text" text="[SerializeField]&#10;WebDomainVerifier domainVerifier;&#10;&#10;IEnumerator Start() {&#10;    yield return StartCoroutine(domainVerifier.VerifyWebDomain());&#10;&#10;    // Do something based on the verifier&apos;s state&#10;    Debug.Log(domainVerifier.CurrentState);&#10;}&#10;" multiline="true" readonly="true" name="CodeExample" class="indent" />
+            <ui:Foldout text="Example code" name="CodeHint" value="false" class="indent">
+                <ui:TextField picking-mode="Ignore" value="filler text" text="[SerializeField]&#10;WebDomainVerifier domainVerifier;&#10;&#10;IEnumerator Start() {&#10;    yield return StartCoroutine(domainVerifier.VerifyWebDomain());&#10;&#10;    // Do something based on the verifier&apos;s state&#10;    Debug.Log(domainVerifier.CurrentState);&#10;}" multiline="true" readonly="true" name="CodeExample" />
+            </ui:Foldout>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
