@@ -1,29 +1,32 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:oge="OmiyaGames.Common.Editor" editor-extension-mode="True">
-  <ui:VisualElement name="Style">
-    <Style src="web-security-style.uss" />
-    <ui:VisualElement name="Root">
-      <oge:ProjectSettingsHeader text="Web Security" name="Header" help-url="https://omiyagames.github.io/omiya-games-web-security" />
-      <oge:Spacer />
-      <ui:VisualElement name="DomainNamesGroup">
-        <uie:PropertyField text="Domain Must Contain" name="DomainMustContain" binding-path="domainMustContain" class="indent" />
-      </ui:VisualElement>
-      <oge:Spacer />
-      <ui:VisualElement name="RemoteDomainListGroup" class="indent">
-        <ui:Label text="Remote Domain List" class="header" style="-unity-font-style: bold;" />
-        <ui:Toggle value="true" text="Download a Remote Domain List" name="IsDownloadDomainListEnabled" tooltip="If checked, downloads a domain list from a specified URL. Without http, downloads relative from the folder WebGL build&apos;s &quot;index.html&quot; is placed." binding-path="downloadRemoteDomainList" />
-        <ui:VisualElement name="DownloadPropertiesGroup" class="indent">
-          <ui:TextField label="Download URL" text="TemplateData/domains" value="TemplateData/domains" tooltip="URL to download a Domain List from. Can be (and is recommended) local path to root of the WebGL build." name="DownloadDomainListUrl" binding-path="remoteDomainListUrl" />
-          <uie:PropertyField label="Decrypter" name="DomainListDecrypter" tooltip="If the downloaded DomainList is encrypted, this object will decrypt its content." allow-scene-objects="false" binding-path="domainDecrypter" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" oge="OmiyaGames.Common.Editor" editor-extension-mode="True">
+    <Style src="project://database/Packages/com.omiyagames.web.security/Editor/web-security-style.uss?fileID=7433441132597879392&amp;guid=0096689714a226e4aa40993b2114df84&amp;type=3#web-security-style" />
+    <ui:VisualElement name="Style">
+        <ui:VisualElement name="Root">
+            <OmiyaGames.Common.Editor.ProjectSettingsHeader text="Web Security" name="Header" help-url="https://omiyagames.github.io/omiya-games-web-security" />
+            <OmiyaGames.Common.Editor.Spacer />
+            <ui:VisualElement name="DomainNamesGroup">
+                <uie:PropertyField text="Domain Must Contain" name="DomainMustContain" binding-path="domainMustContain" class="indent" />
+            </ui:VisualElement>
+            <OmiyaGames.Common.Editor.Spacer />
+            <ui:VisualElement name="RemoteDomainListGroup" class="indent">
+                <ui:Label text="Remote Domain List" class="header" style="-unity-font-style: bold;" />
+                <ui:Toggle value="true" text="Download a Remote Domain List" name="IsDownloadDomainListEnabled" tooltip="If checked, downloads a domain list from a specified URL. Without http, downloads relative from the folder WebGL build&apos;s &quot;index.html&quot; is placed." binding-path="downloadRemoteDomainList" />
+                <ui:VisualElement name="DownloadPropertiesGroup" class="indent">
+                    <ui:TextField label="Download URL" text="TemplateData/domains" value="TemplateData/domains" tooltip="URL to download a Domain List from. Can be (and is recommended) local path to root of the WebGL build." name="DownloadDomainListUrl" binding-path="remoteDomainListUrl" />
+                    <uie:PropertyField label="Decrypter" name="DomainListDecrypter" tooltip="If the downloaded DomainList is encrypted, this object will decrypt its content." allow-scene-objects="false" binding-path="domainDecrypter" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <OmiyaGames.Common.Editor.Spacer />
+            <ui:VisualElement name="DomainVerificationFailGroup" class="indent">
+                <ui:Label text="When Domain Verification Fails" class="header" style="-unity-font-style: bold;" />
+                <ui:Toggle name="IsRedirectingOnFail" tooltip="If checked, redirects the browser to a different website." text="Redirect to Another Website" binding-path="forceRedirectIfDomainDoesntMatch" />
+                <ui:VisualElement name="RedirectToGroup" class="indent">
+                    <ui:TextField label="Redirect URL" text="https://" name="RedirectUrl" tooltip="The URL to the website to redirect to." value="https://" binding-path="redirectURL" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <OmiyaGames.Common.Editor.Spacer />
+            <ui:Label text="Take Advantage of this web security feature by adding in the following code:" display-tooltip-when-elided="true" name="CodeHint" class="indent" style="flex-wrap: wrap; white-space: normal;" />
+            <ui:TextField picking-mode="Ignore" value="filler text" text="[SerializeField]&#10;WebDomainVerifier domainVerifier;&#10;&#10;IEnumerator Start() {&#10;    yield return StartCoroutine(domainVerifier.VerifyWebDomain());&#10;&#10;    // Do something based on the verifier&apos;s state&#10;    Debug.Log(domainVerifier.CurrentState);&#10;}&#10;" multiline="true" readonly="true" name="CodeExample" class="indent" />
         </ui:VisualElement>
-      </ui:VisualElement>
-      <oge:Spacer />
-      <ui:VisualElement name="DomainVerificationFailGroup" class="indent">
-        <ui:Label text="When Domain Verification Fails" class="header" style="-unity-font-style: bold;" />
-        <ui:Toggle name="IsRedirectingOnFail" tooltip="If checked, redirects the browser to a different website." text="Redirect to Another Website" binding-path="forceRedirectIfDomainDoesntMatch" />
-        <ui:VisualElement name="RedirectToGroup" class="indent">
-          <ui:TextField label="Redirect URL" text="https://" name="RedirectUrl" tooltip="The URL to the website to redirect to." value="https://" binding-path="redirectURL" />
-        </ui:VisualElement>
-      </ui:VisualElement>
     </ui:VisualElement>
-  </ui:VisualElement>
 </ui:UXML>

@@ -61,7 +61,7 @@ namespace OmiyaGames.Web.Security.Editor
 	public class WebDomainVerifierPropertyDrawer : SettingsPropertyDrawer
 	{
 		/// <inheritdoc/>
-		public override string AssetPath => WebDomainVerifier.ProjectSettingsPath;
+		public override string SidebarDisplayPath => WebDomainVerifier.SidebarDisplayPath;
 
 		/// <inheritdoc/>
 		public override void Reset(SerializedProperty property)

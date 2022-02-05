@@ -60,10 +60,7 @@ namespace OmiyaGames.Web.Security.Editor
 	[CustomEditor(typeof(WebDomainVerifier))]
 	public class WebDomainVerifierEditor : SettingsEditor
 	{
-		/// <summary>
-		/// The path to the <see cref="ScriptableObject"/>
-		/// in the Assets folder.
-		/// </summary>
-		public override string AssetPath => WebDomainVerifier.ProjectSettingsPath;
+		/// <inheritdoc/>
+		public override string SidebarDisplayPath => WebDomainVerifier.SidebarDisplayPath;
 	}
 }

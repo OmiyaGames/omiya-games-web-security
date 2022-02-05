@@ -104,7 +104,7 @@ namespace OmiyaGames.Web.Security
         /// <summary>
         /// Path where this asset will be created.
         /// </summary>
-        public const string ProjectSettingsPath = "Project/Omiya Games/Web Security";
+        public const string SidebarDisplayPath = "Project/Omiya Games/Web Security";
 
         public delegate void OnVerifyWebDomain(WebDomainVerifier source, VerifyEventArgs args);
         public delegate void OnStateChange(WebDomainVerifier source, StateChangeEventArgs args);
