@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEditor.UIElements;
 using OmiyaGames.Global.Editor;
+using OmiyaGames.Global.Settings.Editor;
 
 namespace OmiyaGames.Web.Security.Editor
 {
@@ -165,6 +166,9 @@ namespace OmiyaGames.Web.Security.Editor
             // Update the toggles to enable/disable UI groups
             BindToggleToUiGroup(fullTree, "IsDownloadDomainListEnabled", "DownloadPropertiesGroup");
             BindToggleToUiGroup(fullTree, "IsRedirectingOnFail", "RedirectToGroup");
+
+            // Update tree visibility based on search terms
+            SettingsEditorHelpers.UpdateElementVisibility(fullTree, searchContext);
 
             // Bind the UXML to a serialized object
             // Note: this must be done last

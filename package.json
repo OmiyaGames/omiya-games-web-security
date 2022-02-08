@@ -17,6 +17,7 @@
     "com.unity.ext.nunit": "1.0.0",
     "com.omiyagames.common": "1.1.0",
     "com.omiyagames.global": "1.2.0",
+    "com.omiyagames.global.settings": "1.0.0-pre.1",
     "com.omiyagames.cryptography": "1.0.0"
   },
   "keywords": [
