@@ -167,9 +167,6 @@ namespace OmiyaGames.Web.Security.Editor
             BindToggleToUiGroup(fullTree, "IsDownloadDomainListEnabled", "DownloadPropertiesGroup");
             BindToggleToUiGroup(fullTree, "IsRedirectingOnFail", "RedirectToGroup");
 
-            // Update tree visibility based on search terms
-            SettingsEditorHelpers.UpdateElementVisibility(fullTree, searchContext);
-
             // Bind the UXML to a serialized object
             // Note: this must be done last
             webDomainVerifier = new SerializedObject(Asset);
