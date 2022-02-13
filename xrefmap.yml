@@ -38,62 +38,51 @@ references:
   commentId: T:OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor
   fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor
   nameWithType: WebDomainVerifierEditor
-- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.HelpInfo
-  name: HelpInfo
-  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_HelpInfo
-  commentId: F:OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.HelpInfo
-  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.HelpInfo
-  nameWithType: WebDomainVerifierEditor.HelpInfo
-- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_OnInspectorGUI
-  commentId: M:OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.OnInspectorGUI
-  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.OnInspectorGUI()
-  nameWithType: WebDomainVerifierEditor.OnInspectorGUI()
-- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_OnInspectorGUI_
-  commentId: Overload:OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.OnInspectorGUI
+- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.SidebarDisplayPath
+  name: SidebarDisplayPath
+  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_SidebarDisplayPath
+  commentId: P:OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.SidebarDisplayPath
+  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.SidebarDisplayPath
+  nameWithType: WebDomainVerifierEditor.SidebarDisplayPath
+- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.SidebarDisplayPath*
+  name: SidebarDisplayPath
+  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_SidebarDisplayPath_
+  commentId: Overload:OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.SidebarDisplayPath
   isSpec: "True"
-  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.OnInspectorGUI
-  nameWithType: WebDomainVerifierEditor.OnInspectorGUI
+  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.SidebarDisplayPath
+  nameWithType: WebDomainVerifierEditor.SidebarDisplayPath
 - uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer
   name: WebDomainVerifierPropertyDrawer
   href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html
   commentId: T:OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer
   fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer
   nameWithType: WebDomainVerifierPropertyDrawer
-- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.EditButtonWidth
-  name: EditButtonWidth
-  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierPropertyDrawer_EditButtonWidth
-  commentId: F:OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.EditButtonWidth
-  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.EditButtonWidth
-  nameWithType: WebDomainVerifierPropertyDrawer.EditButtonWidth
-- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.HorizontalMargin
-  name: HorizontalMargin
-  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierPropertyDrawer_HorizontalMargin
-  commentId: F:OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.HorizontalMargin
-  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.HorizontalMargin
-  nameWithType: WebDomainVerifierPropertyDrawer.HorizontalMargin
-- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.OnGUI(Rect,SerializedProperty,GUIContent)
-  name: OnGUI(Rect, SerializedProperty, GUIContent)
-  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierPropertyDrawer_OnGUI_Rect_SerializedProperty_GUIContent_
-  commentId: M:OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.OnGUI(Rect,SerializedProperty,GUIContent)
-  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.OnGUI(Rect, SerializedProperty, GUIContent)
-  nameWithType: WebDomainVerifierPropertyDrawer.OnGUI(Rect, SerializedProperty, GUIContent)
-- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.OnGUI*
-  name: OnGUI
-  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierPropertyDrawer_OnGUI_
-  commentId: Overload:OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.OnGUI
+- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.Reset(SerializedProperty)
+  name: Reset(SerializedProperty)
+  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierPropertyDrawer_Reset_SerializedProperty_
+  commentId: M:OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.Reset(SerializedProperty)
+  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.Reset(SerializedProperty)
+  nameWithType: WebDomainVerifierPropertyDrawer.Reset(SerializedProperty)
+- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.Reset*
+  name: Reset
+  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierPropertyDrawer_Reset_
+  commentId: Overload:OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.Reset
   isSpec: "True"
-  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.OnGUI
-  nameWithType: WebDomainVerifierPropertyDrawer.OnGUI
-- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.ResetButtonWidth
-  name: ResetButtonWidth
-  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierPropertyDrawer_ResetButtonWidth
-  commentId: F:OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.ResetButtonWidth
-  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.ResetButtonWidth
-  nameWithType: WebDomainVerifierPropertyDrawer.ResetButtonWidth
+  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.Reset
+  nameWithType: WebDomainVerifierPropertyDrawer.Reset
+- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.SidebarDisplayPath
+  name: SidebarDisplayPath
+  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierPropertyDrawer_SidebarDisplayPath
+  commentId: P:OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.SidebarDisplayPath
+  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.SidebarDisplayPath
+  nameWithType: WebDomainVerifierPropertyDrawer.SidebarDisplayPath
+- uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.SidebarDisplayPath*
+  name: SidebarDisplayPath
+  href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.html#OmiyaGames_Web_Security_Editor_WebDomainVerifierPropertyDrawer_SidebarDisplayPath_
+  commentId: Overload:OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.SidebarDisplayPath
+  isSpec: "True"
+  fullName: OmiyaGames.Web.Security.Editor.WebDomainVerifierPropertyDrawer.SidebarDisplayPath
+  nameWithType: WebDomainVerifierPropertyDrawer.SidebarDisplayPath
 - uid: OmiyaGames.Web.Security.Editor.WebDomainVerifierSettingsProvider
   name: WebDomainVerifierSettingsProvider
   href: api/OmiyaGames.Web.Security.Editor.WebDomainVerifierSettingsProvider.html
@@ -458,12 +447,6 @@ references:
   commentId: T:OmiyaGames.Web.Security.WebDomainVerifier.OnVerifyWebDomain
   fullName: OmiyaGames.Web.Security.WebDomainVerifier.OnVerifyWebDomain
   nameWithType: WebDomainVerifier.OnVerifyWebDomain
-- uid: OmiyaGames.Web.Security.WebDomainVerifier.ProjectSettingsPath
-  name: ProjectSettingsPath
-  href: api/OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_ProjectSettingsPath
-  commentId: F:OmiyaGames.Web.Security.WebDomainVerifier.ProjectSettingsPath
-  fullName: OmiyaGames.Web.Security.WebDomainVerifier.ProjectSettingsPath
-  nameWithType: WebDomainVerifier.ProjectSettingsPath
 - uid: OmiyaGames.Web.Security.WebDomainVerifier.RemoteDomainListHeader
   name: RemoteDomainListHeader
   href: api/OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_RemoteDomainListHeader
@@ -496,6 +479,12 @@ references:
   isSpec: "True"
   fullName: OmiyaGames.Web.Security.WebDomainVerifier.RetrievedHostName
   nameWithType: WebDomainVerifier.RetrievedHostName
+- uid: OmiyaGames.Web.Security.WebDomainVerifier.SidebarDisplayPath
+  name: SidebarDisplayPath
+  href: api/OmiyaGames.Web.Security.WebDomainVerifier.html#OmiyaGames_Web_Security_WebDomainVerifier_SidebarDisplayPath
+  commentId: F:OmiyaGames.Web.Security.WebDomainVerifier.SidebarDisplayPath
+  fullName: OmiyaGames.Web.Security.WebDomainVerifier.SidebarDisplayPath
+  nameWithType: WebDomainVerifier.SidebarDisplayPath
 - uid: OmiyaGames.Web.Security.WebDomainVerifier.State
   name: WebDomainVerifier.State
   href: api/OmiyaGames.Web.Security.WebDomainVerifier.State.html

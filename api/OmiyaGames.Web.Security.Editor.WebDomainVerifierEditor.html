@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class WebDomainVerifierEditor
    | Web Security documentation ">
-    <meta name="generator" content="docfx 2.56.2.0">
+    <meta name="generator" content="docfx 2.59.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -61,11 +61,11 @@
       <div class="container body-content">
         
         <div id="search-results">
-          <div class="search-list"></div>
+          <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
             <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
           </div>
-          <ul id="pagination"></ul>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
@@ -96,7 +96,7 @@ Appears under inspector when selecting the asset.</p>
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
   <h5 id="OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class WebDomainVerifierEditor : UnityEditor.Editor</code></pre>
+    <pre><code class="lang-csharp hljs">public class WebDomainVerifierEditor : SettingsEditor</code></pre>
   </div>
   <h5 id="OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p><copyright file="WebDomainVerifierSettingsProvider.cs" company="Omiya Games">
@@ -122,20 +122,27 @@ THE SOFTWARE.
 <strong>Version:</strong> 0.2.0-preview.1<br>
 <strong>Date:</strong> 6/29/2020<br>
 <strong>Author:</strong> Taro Omiya
-</td><td>Initial verison.</td></tr></tbody></table></p>
+</td><td>Initial verison.</td></tr><tr><td>
+<strong>Version:</strong> 1.1.0<br>
+<strong>Date:</strong> 2/4/2022<br>
+<strong>Author:</strong> Taro Omiya
+</td><td>
+Refactor some code to <code>OmiyaGames.Global</code> namespace.
+</td></tr></tbody></table></p>
 </div>
-  <h3 id="fields">Fields
+  <h3 id="properties">Properties
   </h3>
   
   
-  <h4 id="OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_HelpInfo" data-uid="OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.HelpInfo">HelpInfo</h4>
+  <a id="OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_SidebarDisplayPath_" data-uid="OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.SidebarDisplayPath*"></a>
+  <h4 id="OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_SidebarDisplayPath" data-uid="OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.SidebarDisplayPath">SidebarDisplayPath</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string HelpInfo = &quot;This is the common Web Domain Verifier asset used in both scripts and project settings window. Please do not move or delete it from the project. If using a version control tool, remember to add this asset into the project as well.&quot;</code></pre>
+    <pre><code class="lang-csharp hljs">public override string SidebarDisplayPath { get; }</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
@@ -150,18 +157,6 @@ THE SOFTWARE.
       </tr>
     </tbody>
   </table>
-  <h3 id="methods">Methods
-  </h3>
-  
-  
-  <a id="OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_OnInspectorGUI_" data-uid="OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.OnInspectorGUI*"></a>
-  <h4 id="OmiyaGames_Web_Security_Editor_WebDomainVerifierEditor_OnInspectorGUI" data-uid="OmiyaGames.Web.Security.Editor.WebDomainVerifierEditor.OnInspectorGUI">OnInspectorGUI()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void OnInspectorGUI()</code></pre>
-  </div>
 </article>
           </div>
           
@@ -172,7 +167,8 @@ THE SOFTWARE.
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>
